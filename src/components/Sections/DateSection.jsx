@@ -29,21 +29,27 @@ export default function DateSection() {
 
         {/* Botón calendar */}
         <a
-          href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=N3FrbXBzYXZzZDd2OTAyOWY1aTZuNzNxNnQgbmF0YWx5Z3JhbWFqb0Bt&tmsrc=natalygramajo%40gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/boda-naty-nahue.ics"
+          download="boda-naty-nahue.ics"
           className="
-          inline-flex items-center justify-center
-          px-10 py-4
-          bg-white/80
-          text-[#8c6338]
-          rounded-full
-          text-lg
-          tracking-wide
-          shadow-md
-          hover:bg-white
-          transition
-          "
+            inline-flex items-center justify-center
+            px-10 py-4
+            bg-white/80
+            text-[#8c6338]
+            rounded-full
+            text-lg
+            tracking-wide
+            shadow-md
+
+            transition-all duration-300 ease-out
+            cursor-pointer
+
+            hover:bg-white
+            hover:scale-105
+            hover:shadow-xl
+
+            active:scale-95
+            "
         >
           AGENDAR FECHA
         </a>

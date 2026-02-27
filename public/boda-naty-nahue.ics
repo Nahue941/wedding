@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Naty & Nahue//Boda 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+
+BEGIN:VEVENT
+UID:boda-naty-nahue-20260925@natyy nahue
+DTSTAMP:20260226T120000Z
+DTSTART:20260925T230000Z
+DTEND:20260926T080000Z
+SUMMARY:Boda Naty & Nahue 💍
+DESCRIPTION:Celebramos nuestro casamiento y el comienzo de una nueva etapa juntos. Guardá la fecha y preparate para una noche inolvidable 🥂💃
+LOCATION:Av. Francisco Piovano 3787\, Moreno\, Provincia de Buenos Aires\, Argentina
+
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: Boda Naty & Nahue 💍
+END:VALARM
+
+END:VEVENT
+END:VCALENDAR

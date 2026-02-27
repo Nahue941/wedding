@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="relative relative scroll-smooth">
-      <EnvelopeIntro onFinish={() => setOpened(true)} />
+      {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
 
       <div
         style={{
