@@ -56,7 +56,7 @@ export default function InfoSection() {
   ];
 
   return (
-    <Section className="bg-[#e9e4dd] px-6">
+    <Section className="bg-[#e9e4dd] px-6" id="info">
       <div className="w-full max-w-3xl mx-auto flex flex-col gap-10 mt-8">
         {/* Título */}
         <h2 className="text-3xl sm:text-5xl font-light text-center text-[#9c7446]">

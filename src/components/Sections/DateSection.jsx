@@ -6,7 +6,7 @@ export default function DateSection() {
   const weddingDate = new Date(WEDDING_DATE);
 
   return (
-    <Section className="bg-[#d2a56f] px-6 text-white">
+    <Section className="bg-[#d2a56f] px-6 text-white" id="date">
       <div className="max-w-4xl w-full text-center text-white">
         {/* Título */}
         <h2 className="text-4xl sm:text-6xl font-light tracking-wide mb-8">

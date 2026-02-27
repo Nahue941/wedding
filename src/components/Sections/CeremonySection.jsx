@@ -2,7 +2,7 @@ import Section from "../SectionComponent";
 
 export default function CeremonySection() {
   return (
-    <Section className="bg-[#f3f1ee] px-6">
+    <Section className="bg-[#f3f1ee] px-6" id="ceremony">
       <div className="w-full max-w-4xl mx-auto text-center">
         {/* Título */}
         <h2 className="text-3xl sm:text-5xl font-light text-[#9c7446] mb-8 mt-8">
@@ -13,9 +13,9 @@ export default function CeremonySection() {
         <div className="w-full bg-[#e7e3dd] rounded-xl py-6 px-4 mb-10">
           <div className="grid grid-cols-2 divide-x divide-[#d6d1ca]">
             <div className="flex flex-col items-center justify-center">
-              <span className="text-3xl font-medium text-[#5c5c5c]">20</span>
+              <span className="text-3xl font-medium text-[#5c5c5c]">25</span>
               <span className="text-sm tracking-wide text-[#5c5c5c] mt-1">
-                DICIEMBRE
+                SEPTIEMBRE
               </span>
             </div>
 

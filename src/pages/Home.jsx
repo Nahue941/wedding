@@ -11,7 +11,7 @@ export default function Home() {
   const [opened, setOpened] = useState(false);
 
   return (
-    <div className="relative scroll-smooth">
+    <div className="relative">
       {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
 
       <div
