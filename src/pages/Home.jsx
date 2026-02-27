@@ -1,5 +1,6 @@
 import { EASING, TRANSITION_TIME } from "../utils/constants";
 
+import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
 import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
@@ -25,6 +26,7 @@ export default function Home() {
         <div className="snap-y snap-mandatory">
           <Hero opened={opened} />
           <DateSection />
+          <CeremonySection />
         </div>
       </div>
     </div>
