@@ -1,4 +1,5 @@
-import { useCountdown } from "../../hooks/useCountdown";
+import CountdownCard from "./CountDownCard";
+import { useCountdown } from "@hooks/useCountdown";
 
 export default function Countdown({ targetDate }) {
   const timeLeft = useCountdown(targetDate);
@@ -11,10 +12,5 @@ export default function Countdown({ targetDate }) {
     );
   }
 
-  return (
-    <h3 className="text-lg sm:text-xl font-light opacity-80">
-      {timeLeft.days} días {timeLeft.hours} horas {timeLeft.minutes} minutos{" "}
-      {timeLeft.seconds} segundos
-    </h3>
-  );
+  return <CountdownCard time={timeLeft} />;
 }

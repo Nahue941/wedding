@@ -23,7 +23,7 @@ export default function DateSection() {
         </p>
 
         {/* Countdown */}
-        <div className="bg-white text-[#b78952] rounded-2xl shadow-xl py-8 px-4 sm:px-10 mb-12">
+        <div className="bg-white text-[#b78952] rounded-2xl shadow-xl py-4 px-4 sm:px-10 mb-12">
           <Countdown targetDate={weddingDate} />
         </div>
 
