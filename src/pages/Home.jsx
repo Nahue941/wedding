@@ -4,13 +4,14 @@ import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
 import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
+import InfoSection from "../components/Sections/InfoSection";
 import { useState } from "react";
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
 
   return (
-    <div className="relative relative scroll-smooth">
+    <div className="relative scroll-smooth">
       {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
 
       <div
@@ -27,6 +28,7 @@ export default function Home() {
           <Hero opened={opened} />
           <DateSection />
           <CeremonySection />
+          <InfoSection />
         </div>
       </div>
     </div>
