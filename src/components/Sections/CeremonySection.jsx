@@ -5,7 +5,7 @@ export default function CeremonySection() {
     <Section className="bg-[#f3f1ee] px-6">
       <div className="w-full max-w-4xl mx-auto text-center">
         {/* Título */}
-        <h2 className="text-3xl sm:text-5xl font-light text-[#9c7446] mb-8">
+        <h2 className="text-3xl sm:text-5xl font-light text-[#9c7446] mb-8 mt-8">
           Ceremonia + Celebración
         </h2>
 
@@ -31,7 +31,7 @@ export default function CeremonySection() {
         {/* Imagen */}
         <div className="w-full mb-10">
           <img
-            src="https://via.placeholder.com/800x600"
+            src="/images/Salon.jpeg"
             alt="Ceremonia"
             className="w-full h-auto rounded-lg object-cover"
           />
@@ -47,23 +47,27 @@ export default function CeremonySection() {
         </p>
 
         {/* Botón */}
-        <button
+        <a
+          href="https://maps.app.goo.gl/9rXVneKoKFsySHxp8"
+          target="_blank"
+          rel="noopener noreferrer"
           className="
-            px-8 py-4
-            bg-[#9c7446]
-            text-white
-            rounded-lg
-            tracking-wide
-            shadow-md
-            transition-all duration-300 ease-out
-            hover:scale-105
-            hover:shadow-lg
-            active:scale-95
-            cursor-pointer
-          "
+                px-8 py-4
+                mb-8
+                bg-[#9c7446]
+                text-white
+                rounded-lg
+                tracking-wide
+                shadow-md
+                transition-all duration-300 ease-out
+                hover:scale-105
+                hover:shadow-lg
+                active:scale-95
+                cursor-pointer
+                inline-flex items-center justify-center"
         >
           UBICACIÓN
-        </button>
+        </a>
       </div>
     </Section>
   );

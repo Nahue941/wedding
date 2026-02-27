@@ -9,7 +9,7 @@ export default function Hero({ opened }) {
   ];
 
   return (
-    <Section className="relative overflow-hidden" centered={false}>
+    <Section className="relative overflow-hidden h-[80dvh]" centered={false}>
       {opened && <HeroCarousel images={images} />}
 
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
