@@ -48,7 +48,7 @@ export default function CeremonySection() {
 
         {/* Botón */}
         <a
-          href="https://maps.app.goo.gl/9rXVneKoKFsySHxp8"
+          href="https://maps.app.goo.gl/VKRwZpnegZjCGwiD8"
           target="_blank"
           rel="noopener noreferrer"
           className="
