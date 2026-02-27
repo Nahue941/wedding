@@ -1,38 +1,32 @@
 import Countdown from "./Countdown";
+import HeroCarousel from "./Carousel";
 
-export default function Hero() {
+export default function Hero({ opened }) {
   const weddingDate = new Date("2026-09-25T00:00:00");
 
+  const images = [
+    "/images/Carousel1.jpeg",
+    "/images/Carousel2.jpeg",
+    "/images/Carousel3.jpeg",
+  ];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background image */}
-      <div
-        className="
-          absolute inset-0
-          bg-[url('/images/hero.jpeg')]
-          bg-no-repeat
-          bg-center
-          bg-contain
-          sm:bg-cover
-          filter grayscale blur-sm
-          scale-105
-        "
-      />
+    <section className="relative min-h-screen overflow-hidden bg-black">
+      {/* Carousel solo cuando opened */}
+      {opened && <HeroCarousel images={images} />}
 
-      {/* Dark overlay opcional para mejor contraste */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 text-white">
-        <h1 className="text-4xl sm:text-6xl font-light tracking-wide mb-4 drop-shadow-md">
-          Nos casamos
-        </h1>
+      {/* Contenido encima */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center">
+        <div className="text-center px-6 text-white">
+          <h1 className="text-4xl sm:text-6xl font-light tracking-wide mb-4">
+            Nos casamos
+          </h1>
 
-        <h2 className="text-xl sm:text-2xl font-light mb-6 drop-shadow-sm">
-          25/09/2026
-        </h2>
+          <h2 className="text-xl sm:text-2xl font-light mb-6">25/09/2026</h2>
 
-        <div className="drop-shadow-sm">
           <Countdown targetDate={weddingDate} />
         </div>
       </div>
