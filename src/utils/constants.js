@@ -3,3 +3,4 @@ export const TRANSITION_TIME_IN_MS = 600;
 export const TRANSITION_TIME = `${TRANSITION_TIME_IN_MS}ms`;
 export const TRANSITION_TIME2 = `${TRANSITION_TIME_IN_MS - 100}ms`;
 export const EASING = "cubic-bezier(.65,.05,.36,1)";
+export const WEDDING_DATE = "2026-09-25T00:00:00";

@@ -20,7 +20,7 @@ export default function HeroCarousel({ images }) {
   );
 
   return (
-    <div className="h-[85vh] w-full overflow-hidden">
+    <div className="h-full w-full overflow-hidden">
       <div className="h-full overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {images.map((src, i) => (
