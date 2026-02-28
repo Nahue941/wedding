@@ -5,14 +5,25 @@ import DateSection from "../components/Sections/DateSection";
 import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
 import InfoSection from "../components/Sections/InfoSection";
-import { useState } from "react";
+import RsvpModal from "../components/RsvpModal";
+import { useMemo, useState } from "react";
+
+function hasUrlToken() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return Boolean(new URLSearchParams(window.location.search).get("token")?.trim());
+}
 
 export default function Home() {
-  const [opened, setOpened] = useState(false);
+  const hasToken = useMemo(() => hasUrlToken(), []);
+  const [opened, setOpened] = useState(!hasToken);
 
   return (
     <div className="relative">
-      {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
+      {!opened && hasToken && <EnvelopeIntro onFinish={() => setOpened(true)} />}
+      <RsvpModal />
 
       <div
         style={{

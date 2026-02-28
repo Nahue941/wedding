@@ -1,16 +1,19 @@
 import { defineConfig } from "vite";
 import path from "path";
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@utils": path.resolve(__dirname, "./src/utils"),
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@": path.resolve(dirname, "./src"),
+      "@utils": path.resolve(dirname, "./src/utils"),
+      "@components": path.resolve(dirname, "./src/components"),
+      "@hooks": path.resolve(dirname, "./src/hooks"),
     },
   },
 });
