@@ -8,7 +8,7 @@ export default function CeremonySection() {
           Ceremonia + Celebracion
         </h2>
 
-        <div className="w-full bg-brand-blush/35 rounded-xl py-6 px-4 mb-10">
+        <div className="w-full bg-brand-blush/65 rounded-xl py-6 px-4 mb-10">
           <div className="grid grid-cols-2 divide-x divide-brand-smoke/30">
             <div className="flex flex-col items-center justify-center">
               <span className="text-3xl font-medium text-brand-black">25</span>
@@ -18,7 +18,9 @@ export default function CeremonySection() {
             </div>
 
             <div className="flex flex-col items-center justify-center">
-              <span className="text-3xl font-medium text-brand-black">20:00</span>
+              <span className="text-3xl font-medium text-brand-black">
+                20:00
+              </span>
               <span className="text-sm tracking-wide text-brand-black mt-1">
                 HORAS
               </span>

@@ -16,7 +16,7 @@ export default function CountdownCard({ time }) {
               ${index !== items.length - 1 ? "after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-12 after:w-px after:bg-brand-text/25" : ""}
             `}
         >
-          <span className="text-3xl sm:text-4xl font-semibold text-brand-black">
+          <span className="text-3xl sm:text-4xl font-semibold text-brand-text">
             {item.value}
           </span>
           <span className="text-sm sm:text-base text-brand-text/85 mt-2">
