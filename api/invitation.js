@@ -6,17 +6,42 @@ import {
   parseBoolean,
 } from "./_lib/sheets.js";
 
+const ALLOWED_HOSTS = new Set([
+  "natynahue.com",
+  "www.natynahue.com",
+  "localhost:5173",
+  "localhost:3000",
+  "127.0.0.1:5173",
+  "127.0.0.1:3000",
+]);
+
+const ALLOWED_ORIGINS = new Set([
+  "https://natynahue.com",
+  "https://www.natynahue.com",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:3000",
+]);
+
 function sendJson(res, status, payload) {
   res.status(status).json(payload);
 }
 
-function getQueryParam(req, key) {
-  if (req.query && key in req.query) {
-    return req.query[key];
+function isAllowedHost(host) {
+  if (!host) {
+    return false;
   }
 
-  const url = new URL(req.url, "http://localhost");
-  return url.searchParams.get(key);
+  return ALLOWED_HOSTS.has(host.toLowerCase());
+}
+
+function isAllowedOrigin(origin) {
+  if (!origin) {
+    return true;
+  }
+
+  return ALLOWED_ORIGINS.has(origin.toLowerCase());
 }
 
 export default async function handler(req, res) {
@@ -26,7 +51,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    const token = normalizeToken(getQueryParam(req, "token"));
+    const host = String(req.headers.host ?? "").toLowerCase();
+    if (!isAllowedHost(host)) {
+      sendJson(res, 403, { ok: false, code: "FORBIDDEN_HOST", host });
+      return;
+    }
+
+    const origin = req.headers.origin;
+    if (!isAllowedOrigin(origin)) {
+      sendJson(res, 403, { ok: false, code: "FORBIDDEN_ORIGIN", origin });
+      return;
+    }
+
+    const url = new URL(req.url, `https://${host}`);
+    const token = normalizeToken(url.searchParams.get("token"));
     if (!token) {
       sendJson(res, 400, { ok: false, code: "MISSING_TOKEN" });
       return;
