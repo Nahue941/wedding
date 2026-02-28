@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-wine: #52000a;
+  --color-brand-cream: #f9dec9;
+  --color-brand-smoke: #6d696a;
+  --color-brand-blush: #fcb3b0;
+  --color-brand-text: #3d0007;
+  --color-brand-black: #141414;
+}
+
 html {
   scroll-behavior: smooth;
 }

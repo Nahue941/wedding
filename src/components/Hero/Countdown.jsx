@@ -6,8 +6,8 @@ export default function Countdown({ targetDate }) {
 
   if (!timeLeft) {
     return (
-      <h3 className="text-lg sm:text-xl font-light opacity-80">
-        ¡Hoy es el gran día!
+      <h3 className="text-lg sm:text-xl font-light text-brand-text/85">
+        Hoy es el gran dia!
       </h3>
     );
   }

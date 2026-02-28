@@ -177,7 +177,7 @@ export default function RsvpModal() {
       <button
         type="button"
         onClick={openModal}
-        className="fixed bottom-6 right-4 z-40 rounded-full bg-[#9c7446] px-5 py-3 text-sm font-medium text-white shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#9c7446] focus:ring-offset-2"
+        className="fixed bottom-6 right-4 z-40 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine focus:ring-offset-2"
       >
         Responder invitación
       </button>
@@ -186,7 +186,7 @@ export default function RsvpModal() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4">
           <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-[#9c7446]">RSVP</h3>
+              <h3 className="text-xl font-semibold text-brand-text">RSVP</h3>
               <button
                 type="button"
                 onClick={closeModal}
@@ -276,7 +276,7 @@ export default function RsvpModal() {
                 </label>
 
                 {alreadySubmitted && (
-                  <p className="text-sm font-medium text-[#9c7446]">
+                  <p className="text-sm font-medium text-brand-text">
                     Ya confirmaste
                   </p>
                 )}
@@ -284,7 +284,7 @@ export default function RsvpModal() {
                 <button
                   type="submit"
                   disabled={alreadySubmitted || isSubmitting}
-                  className="w-full rounded-lg bg-[#9c7446] px-4 py-2.5 text-white disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-lg bg-brand-wine px-4 py-2.5 text-brand-cream disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isSubmitting ? "Enviando..." : "Confirmar asistencia"}
                 </button>

@@ -9,14 +9,14 @@ export default function Hero({ opened }) {
   ];
 
   return (
-    <Section className="relative overflow-hidden h-[80dvh]" centered={false}>
+    <Section className="relative overflow-hidden h-[80dvh] bg-brand-wine" centered={false}>
       {opened && <HeroCarousel images={images} />}
 
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
       {/* Contenido encima */}
       <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <div className="text-center px-6 text-white">
+        <div className="text-center px-6 text-brand-cream">
           <h1 className="text-4xl sm:text-6xl font-light tracking-wide mb-4">
             Naty
           </h1>
