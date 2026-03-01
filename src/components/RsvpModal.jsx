@@ -27,7 +27,7 @@ export default function RsvpModal() {
   const token = useMemo(() => getTokenFromUrl(), []);
   const localStorageKey = `${LOCAL_STORAGE_PREFIX}${token}`;
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(Boolean(token));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [invitationError, setInvitationError] = useState("");
   const [name, setName] = useState("");
@@ -70,40 +70,63 @@ export default function RsvpModal() {
     };
   }, []);
 
-  async function openModal() {
-    setIsOpen(true);
-    setInvitationError("");
-    setIsLoading(true);
+  useEffect(() => {
+    let cancelled = false;
 
-    if (!token) {
-      setInvitationError("Token de invitación inválido.");
-      setIsLoading(false);
-      return;
-    }
-
-    const submittedLocally =
-      dedupeByToken &&
-      typeof window !== "undefined" &&
-      localStorage.getItem(localStorageKey) === "1";
-
-    try {
-      const response = await fetch(
-        `/api/invitation?token=${encodeURIComponent(token)}`,
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        setInvitationError("No pudimos validar tu invitación.");
+    async function bootstrapInvitationState() {
+      if (!token || !rsvpEnabled) {
+        setIsInitializing(false);
         return;
       }
 
-      setName(data.invitation?.name?.trim?.() ?? "");
-      setAlreadySubmitted(Boolean(data.alreadySubmitted) || submittedLocally);
-    } catch {
-      setInvitationError("No pudimos validar tu invitación.");
-    } finally {
-      setIsLoading(false);
+      setIsInitializing(true);
+      setInvitationError("");
+
+      const submittedLocally =
+        dedupeByToken &&
+        typeof window !== "undefined" &&
+        localStorage.getItem(localStorageKey) === "1";
+
+      if (submittedLocally) {
+        setAlreadySubmitted(true);
+      }
+
+      try {
+        const response = await fetch(
+          `/api/invitation?token=${encodeURIComponent(token)}`,
+        );
+        const data = await response.json();
+
+        if (!response.ok) {
+          if (!cancelled && !submittedLocally) {
+            setInvitationError("No pudimos validar tu invitación.");
+          }
+          return;
+        }
+
+        if (!cancelled) {
+          setName(data.invitation?.name?.trim?.() ?? "");
+          setAlreadySubmitted(Boolean(data.alreadySubmitted) || submittedLocally);
+        }
+      } catch {
+        if (!cancelled && !submittedLocally) {
+          setInvitationError("No pudimos validar tu invitación.");
+        }
+      } finally {
+        if (!cancelled) {
+          setIsInitializing(false);
+        }
+      }
     }
+
+    bootstrapInvitationState();
+    return () => {
+      cancelled = true;
+    };
+  }, [token, rsvpEnabled, dedupeByToken, localStorageKey]);
+
+  function openModal() {
+    setIsOpen(true);
   }
 
   function closeModal() {
@@ -117,7 +140,7 @@ export default function RsvpModal() {
   async function onSubmit(event) {
     event.preventDefault();
 
-    if (!token || alreadySubmitted) {
+    if (!token || alreadySubmitted || invitationError || isInitializing) {
       return;
     }
 
@@ -135,7 +158,6 @@ export default function RsvpModal() {
     }
 
     setIsSubmitting(true);
-    setInvitationError("");
 
     try {
       const response = await fetch("/api/rsvp", {
@@ -159,6 +181,8 @@ export default function RsvpModal() {
       if (dedupeByToken && typeof window !== "undefined") {
         localStorage.setItem(localStorageKey, "1");
       }
+
+      setAlreadySubmitted(true);
       setToastMessage("Confirmación enviada.");
       closeModal();
     } catch {
@@ -179,7 +203,7 @@ export default function RsvpModal() {
         onClick={openModal}
         className="fixed bottom-6 right-4 z-40 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine focus:ring-offset-2"
       >
-        Responder invitación
+        {alreadySubmitted ? "Asistencia Confirmada" : "Responder invitación"}
       </button>
 
       {isOpen && (
@@ -196,15 +220,24 @@ export default function RsvpModal() {
               </button>
             </div>
 
-            {isLoading && (
-              <p className="text-sm text-neutral-700">Cargando...</p>
-            )}
+            {isInitializing && <p className="text-sm text-neutral-700">Cargando...</p>}
 
-            {!isLoading && invitationError && (
+            {!isInitializing && invitationError && (
               <p className="text-sm text-red-600">{invitationError}</p>
             )}
 
-            {!isLoading && !invitationError && (
+            {!isInitializing && !invitationError && alreadySubmitted && (
+              <div className="space-y-3">
+                <h4 className="text-lg sm:text-xl font-semibold text-brand-text">
+                  ¡Gracias por confirmar la asistencia!
+                </h4>
+                <p className="text-sm text-neutral-700">
+                  Nos vemos el 25 de Septiembre para festejar juntos este gran día
+                </p>
+              </div>
+            )}
+
+            {!isInitializing && !invitationError && !alreadySubmitted && (
               <form className="space-y-4" onSubmit={onSubmit}>
                 <label className="block text-sm text-neutral-700">
                   Nombre:
@@ -221,11 +254,9 @@ export default function RsvpModal() {
                   <input
                     type="email"
                     value={form.email}
-                    onChange={(event) =>
-                      updateField("email", event.target.value)
-                    }
+                    onChange={(event) => updateField("email", event.target.value)}
                     required
-                    disabled={alreadySubmitted || isSubmitting}
+                    disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   />
                 </label>
@@ -235,12 +266,10 @@ export default function RsvpModal() {
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={(event) =>
-                      updateField("phone", event.target.value)
-                    }
+                    onChange={(event) => updateField("phone", event.target.value)}
                     required
                     minLength={6}
-                    disabled={alreadySubmitted || isSubmitting}
+                    disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   />
                 </label>
@@ -252,7 +281,7 @@ export default function RsvpModal() {
                     onChange={(event) =>
                       updateField("dietaryRestriction", event.target.value)
                     }
-                    disabled={alreadySubmitted || isSubmitting}
+                    disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   >
                     <option value="none">ninguna</option>
@@ -266,24 +295,16 @@ export default function RsvpModal() {
                   Observaciones
                   <textarea
                     value={form.notes}
-                    onChange={(event) =>
-                      updateField("notes", event.target.value)
-                    }
+                    onChange={(event) => updateField("notes", event.target.value)}
                     maxLength={1000}
-                    disabled={alreadySubmitted || isSubmitting}
+                    disabled={isSubmitting}
                     className="mt-1 min-h-24 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   />
                 </label>
 
-                {alreadySubmitted && (
-                  <p className="text-sm font-medium text-brand-text">
-                    Ya confirmaste
-                  </p>
-                )}
-
                 <button
                   type="submit"
-                  disabled={alreadySubmitted || isSubmitting}
+                  disabled={isSubmitting}
                   className="w-full rounded-lg bg-brand-wine px-4 py-2.5 text-brand-cream disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isSubmitting ? "Enviando..." : "Confirmar asistencia"}
