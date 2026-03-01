@@ -1,4 +1,4 @@
-import { CheckCheck, Mail } from "lucide-react";
+import { CheckCheck, Mail, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
@@ -18,7 +18,7 @@ function Toast({ message, onClose }) {
   }, [onClose]);
 
   return (
-    <div className="fixed bottom-6 right-4 left-4 sm:left-auto sm:w-auto z-[70] rounded-xl bg-[#1f1f1f] px-4 py-3 text-sm text-white shadow-xl">
+    <div className="fixed bottom-6 right-4 left-4 sm:left-auto sm:w-auto z-70 rounded-xl bg-[#1f1f1f] px-4 py-3 text-sm text-white shadow-xl">
       {message}
     </div>
   );
@@ -207,9 +207,15 @@ export default function RsvpModal() {
         className="fixed bottom-6 right-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine ring-offset-2 ring-offset-brand-cream"
       >
         {alreadySubmitted ? (
-          <><CheckCheck size={16} /><span>Asistencia Confirmada</span></>
+          <>
+            <CheckCheck size={16} />
+            <span>Asistencia Confirmada</span>
+          </>
         ) : (
-          <><Mail size={16} /><span>Responder invitacion</span></>
+          <>
+            <Mail size={16} />
+            <span>Responder invitacion</span>
+          </>
         )}
       </button>
 
@@ -223,7 +229,7 @@ export default function RsvpModal() {
                 onClick={closeModal}
                 className="rounded-md px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100"
               >
-                Cerrar
+                <X />
               </button>
             </div>
 
@@ -337,4 +343,3 @@ export default function RsvpModal() {
     </>
   );
 }
-

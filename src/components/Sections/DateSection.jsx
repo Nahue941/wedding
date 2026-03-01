@@ -1,3 +1,4 @@
+import { Calendar } from "lucide-react";
 import Countdown from "@/components/Hero/Countdown";
 import Section from "../SectionComponent";
 import { WEDDING_DATE } from "../../utils/constants";
@@ -29,6 +30,7 @@ export default function DateSection() {
           download="boda-naty-nahue.ics"
           className="
             inline-flex items-center justify-center
+            gap-2.5
             px-10 py-4
             bg-brand-cream
             text-brand-text
@@ -44,6 +46,7 @@ export default function DateSection() {
             active:scale-95
             "
         >
+          <Calendar />
           AGENDAR FECHA
         </a>
       </div>

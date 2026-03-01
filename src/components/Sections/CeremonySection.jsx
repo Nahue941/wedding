@@ -1,3 +1,4 @@
+import { MapPin } from "lucide-react";
 import Section from "../SectionComponent";
 
 export default function CeremonySection() {
@@ -43,27 +44,28 @@ export default function CeremonySection() {
         <p className="text-lg text-brand-text mb-10">
           Av Francisco Piovano 3787, Moreno
         </p>
-
         <a
           href="https://maps.app.goo.gl/VKRwZpnegZjCGwiD8"
           target="_blank"
           rel="noopener noreferrer"
           className="
-                px-8 py-4
-                mb-8
-                bg-brand-text
-                text-brand-cream
-                rounded-lg
-                tracking-wide
-                shadow-md
-                transition-all duration-300 ease-out
-                hover:scale-105
-                hover:shadow-lg
-                active:scale-95
-                cursor-pointer
-                inline-flex items-center justify-center"
+          px-8 py-4
+          mb-8
+          bg-brand-text
+          text-brand-cream
+          rounded-full
+          gap-2.5
+          tracking-wide
+          shadow-md
+          transition-all duration-300 ease-out
+          hover:scale-105
+          hover:shadow-lg
+          active:scale-95
+          cursor-pointer
+          inline-flex items-center justify-center"
         >
-          UBICACION
+          <MapPin size={18} className="shrink-0 -translate-y-px" />
+          UBICACIÓN
         </a>
       </div>
     </Section>
