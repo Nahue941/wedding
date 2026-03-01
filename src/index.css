@@ -2,12 +2,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-wine: #52000a;
-  --color-brand-cream: #fbe8da;
-  --color-brand-smoke: #6d696a;
-  --color-brand-blush: #667761;
+  --color-brand-wine: #3d0007;
+  --color-brand-cream: #ffedeb;
+  --color-brand-smoke: #243742;
+  --color-brand-blush: #ffedeb;
   --color-brand-text: #3d0007;
-  --color-brand-black: #141414;
+  --color-brand-black: #162127;
   --font-parisienne: "Parisienne", cursive;
   --font-lato: "Lato", sans-serif;
 }
