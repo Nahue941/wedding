@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function Accordion({
@@ -52,7 +53,7 @@ export default function Accordion({
                   ${open ? "rotate-180" : ""}
                 `}
               >
-                ▼
+                <ChevronDown size={24} className="shrink-0 -translate-y-px" />
               </span>
             </button>
 

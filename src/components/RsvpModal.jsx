@@ -229,7 +229,7 @@ export default function RsvpModal() {
                 onClick={closeModal}
                 className="rounded-md px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100"
               >
-                <X />
+                <X size={30} className="shrink-0 -translate-y-px" />
               </button>
             </div>
 
