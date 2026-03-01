@@ -16,7 +16,6 @@ export default function EnvelopeIntro({ onFinish }) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Rectángulo inferior */}
       <div
         style={{
           transitionDuration: TRANSITION_TIME2,
@@ -30,7 +29,6 @@ export default function EnvelopeIntro({ onFinish }) {
         `}
       />
 
-      {/* Rectángulo superior */}
       <div
         style={{
           transitionDuration: TRANSITION_TIME2,
@@ -45,23 +43,24 @@ export default function EnvelopeIntro({ onFinish }) {
         `}
       />
 
-      {/* Botón */}
       {!opening && (
         <div className="absolute inset-0 flex items-center justify-center">
           <button
+            type="button"
             onClick={handleOpen}
+            aria-label="Abrir invitación"
             className="
-              px-8 py-4
-              bg-black text-white
-              rounded-full
-              tracking-widest
-              text-sm
-              shadow-lg
+              overflow-hidden
+              transition-transform duration-300 ease-out
+              hover:scale-105
               active:scale-95
-              transition
             "
           >
-            Abrir invitación
+            <img
+              src="/images/og-image.png"
+              alt="Abrir invitación"
+              className="w-55 sm:w-70 h-auto object-cover"
+            />
           </button>
         </div>
       )}
