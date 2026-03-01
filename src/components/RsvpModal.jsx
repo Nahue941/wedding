@@ -1,3 +1,4 @@
+import { CheckCheck, Mail } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
@@ -203,9 +204,13 @@ export default function RsvpModal() {
       <button
         type="button"
         onClick={openModal}
-        className="fixed bottom-6 right-4 z-40 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine ring-offset-2 ring-offset-brand-cream"
+        className="fixed bottom-6 right-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine ring-offset-2 ring-offset-brand-cream"
       >
-        {alreadySubmitted ? "Asistencia Confirmada" : "Responder invitación"}
+        {alreadySubmitted ? (
+          <><CheckCheck size={16} /><span>Asistencia Confirmada</span></>
+        ) : (
+          <><Mail size={16} /><span>Responder invitacion</span></>
+        )}
       </button>
 
       {isOpen && (
@@ -332,3 +337,4 @@ export default function RsvpModal() {
     </>
   );
 }
+
