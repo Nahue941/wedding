@@ -106,7 +106,9 @@ export default function RsvpModal() {
 
         if (!cancelled) {
           setName(data.invitation?.name?.trim?.() ?? "");
-          setAlreadySubmitted(Boolean(data.alreadySubmitted) || submittedLocally);
+          setAlreadySubmitted(
+            Boolean(data.alreadySubmitted) || submittedLocally,
+          );
         }
       } catch {
         if (!cancelled && !submittedLocally) {
@@ -201,7 +203,7 @@ export default function RsvpModal() {
       <button
         type="button"
         onClick={openModal}
-        className="fixed bottom-6 right-4 z-40 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine focus:ring-offset-2"
+        className="fixed bottom-6 right-4 z-40 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine ring-offset-2 ring-offset-brand-cream"
       >
         {alreadySubmitted ? "Asistencia Confirmada" : "Responder invitación"}
       </button>
@@ -220,7 +222,9 @@ export default function RsvpModal() {
               </button>
             </div>
 
-            {isInitializing && <p className="text-sm text-neutral-700">Cargando...</p>}
+            {isInitializing && (
+              <p className="text-sm text-neutral-700">Cargando...</p>
+            )}
 
             {!isInitializing && invitationError && (
               <p className="text-sm text-red-600">{invitationError}</p>
@@ -232,7 +236,8 @@ export default function RsvpModal() {
                   ¡Gracias por confirmar la asistencia!
                 </h4>
                 <p className="text-sm text-neutral-700">
-                  Nos vemos el 25 de Septiembre para festejar juntos este gran día
+                  Nos vemos el 25 de Septiembre para festejar juntos este gran
+                  día.
                 </p>
               </div>
             )}
@@ -254,7 +259,9 @@ export default function RsvpModal() {
                   <input
                     type="email"
                     value={form.email}
-                    onChange={(event) => updateField("email", event.target.value)}
+                    onChange={(event) =>
+                      updateField("email", event.target.value)
+                    }
                     required
                     disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
@@ -266,7 +273,9 @@ export default function RsvpModal() {
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={(event) => updateField("phone", event.target.value)}
+                    onChange={(event) =>
+                      updateField("phone", event.target.value)
+                    }
                     required
                     minLength={6}
                     disabled={isSubmitting}
@@ -295,7 +304,9 @@ export default function RsvpModal() {
                   Observaciones
                   <textarea
                     value={form.notes}
-                    onChange={(event) => updateField("notes", event.target.value)}
+                    onChange={(event) =>
+                      updateField("notes", event.target.value)
+                    }
                     maxLength={1000}
                     disabled={isSubmitting}
                     className="mt-1 min-h-24 w-full rounded-lg border border-neutral-300 px-3 py-2"
