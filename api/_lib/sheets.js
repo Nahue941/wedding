@@ -132,6 +132,28 @@ async function sheetsRequest(pathname, init = {}) {
   return response.json();
 }
 
+function columnNumberToA1(columnNumber) {
+  let column = columnNumber;
+  let label = "";
+
+  while (column > 0) {
+    const remainder = (column - 1) % 26;
+    label = String.fromCharCode(65 + remainder) + label;
+    column = Math.floor((column - 1) / 26);
+  }
+
+  return label;
+}
+
+function parseRowIndexFromA1Range(range) {
+  const match = String(range ?? "").match(/![A-Z]+(\d+)(?::[A-Z]+\d+)?$/);
+  if (!match) {
+    return null;
+  }
+
+  return Number(match[1]);
+}
+
 function rowsToObjects(rows) {
   if (!rows || rows.length === 0) {
     return [];
@@ -161,11 +183,70 @@ async function readSheet(tabName) {
 
 async function appendRow(tabName, values) {
   const encodedRange = encodeURIComponent(`${tabName}!A:Z`);
-  await sheetsRequest(`/values/${encodedRange}:append?valueInputOption=USER_ENTERED`, {
+  const data = await sheetsRequest(
+    `/values/${encodedRange}:append?valueInputOption=USER_ENTERED`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        values: [values],
+      }),
+    },
+  );
+
+  const updatedRange = data?.updates?.updatedRange ?? "";
+  return {
+    updatedRange,
+    rowIndex: parseRowIndexFromA1Range(updatedRange),
+  };
+}
+
+async function readSheetValues(tabName) {
+  const encodedRange = encodeURIComponent(`${tabName}!A:Z`);
+  const data = await sheetsRequest(`/values/${encodedRange}`);
+  return data.values ?? [];
+}
+
+async function updateRsvpEmailTracking(rowIndex, tracking) {
+  const numericRowIndex = Number(rowIndex);
+  if (!Number.isInteger(numericRowIndex) || numericRowIndex < 2) {
+    throw new Error("Invalid row index for RSVP tracking update.");
+  }
+
+  const values = await readSheetValues("rsvp");
+  const headers = values[0] ?? [];
+  const headerMap = new Map(
+    headers.map((header, index) => [String(header).trim(), index + 1]),
+  );
+
+  const emailSentColumn = headerMap.get("emailSent");
+  const emailSentAtColumn = headerMap.get("emailSentAt");
+  const emailErrorColumn = headerMap.get("emailError");
+
+  if (!emailSentColumn || !emailSentAtColumn || !emailErrorColumn) {
+    throw new Error("Missing email tracking columns in rsvp sheet.");
+  }
+
+  const payload = {
+    valueInputOption: "USER_ENTERED",
+    data: [
+      {
+        range: `rsvp!${columnNumberToA1(emailSentColumn)}${numericRowIndex}`,
+        values: [[tracking.emailSent]],
+      },
+      {
+        range: `rsvp!${columnNumberToA1(emailSentAtColumn)}${numericRowIndex}`,
+        values: [[tracking.emailSentAt]],
+      },
+      {
+        range: `rsvp!${columnNumberToA1(emailErrorColumn)}${numericRowIndex}`,
+        values: [[tracking.emailError]],
+      },
+    ],
+  };
+
+  await sheetsRequest("/values:batchUpdate", {
     method: "POST",
-    body: JSON.stringify({
-      values: [values],
-    }),
+    body: JSON.stringify(payload),
   });
 }
 
@@ -212,4 +293,5 @@ export {
   hasSubmittedRsvp,
   normalizeToken,
   parseBoolean,
+  updateRsvpEmailTracking,
 };

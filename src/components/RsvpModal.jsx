@@ -1,5 +1,5 @@
 import { CheckCheck, Mail, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
 
@@ -27,6 +27,7 @@ function Toast({ message, onClose }) {
 export default function RsvpModal() {
   const token = useMemo(() => getTokenFromUrl(), []);
   const localStorageKey = `${LOCAL_STORAGE_PREFIX}${token}`;
+  const hasBootstrappedRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isInitializing, setIsInitializing] = useState(Boolean(token));
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,7 +35,6 @@ export default function RsvpModal() {
   const [name, setName] = useState("");
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [rsvpEnabled, setRsvpEnabled] = useState(true);
-  const [dedupeByToken, setDedupeByToken] = useState(true);
   const [toastMessage, setToastMessage] = useState("");
   const [form, setForm] = useState({
     email: "",
@@ -57,9 +57,6 @@ export default function RsvpModal() {
         if (!cancelled && typeof data.rsvpEnabled === "boolean") {
           setRsvpEnabled(data.rsvpEnabled);
         }
-        if (!cancelled && typeof data.dedupeByToken === "boolean") {
-          setDedupeByToken(data.dedupeByToken);
-        }
       } catch {
         // Optional endpoint: keep defaults if request fails.
       }
@@ -72,10 +69,15 @@ export default function RsvpModal() {
   }, []);
 
   useEffect(() => {
+    if (hasBootstrappedRef.current) {
+      return;
+    }
+    hasBootstrappedRef.current = true;
+
     let cancelled = false;
 
     async function bootstrapInvitationState() {
-      if (!token || !rsvpEnabled) {
+      if (!token) {
         setIsInitializing(false);
         return;
       }
@@ -84,7 +86,6 @@ export default function RsvpModal() {
       setInvitationError("");
 
       const submittedLocally =
-        dedupeByToken &&
         typeof window !== "undefined" &&
         localStorage.getItem(localStorageKey) === "1";
 
@@ -126,7 +127,7 @@ export default function RsvpModal() {
     return () => {
       cancelled = true;
     };
-  }, [token, rsvpEnabled, dedupeByToken, localStorageKey]);
+  }, [token, localStorageKey]);
 
   function openModal() {
     setIsOpen(true);
@@ -181,7 +182,7 @@ export default function RsvpModal() {
         return;
       }
 
-      if (dedupeByToken && typeof window !== "undefined") {
+      if (typeof window !== "undefined") {
         localStorage.setItem(localStorageKey, "1");
       }
 
@@ -214,7 +215,7 @@ export default function RsvpModal() {
         ) : (
           <>
             <Mail size={16} />
-            <span>Responder invitacion</span>
+            <span>Responder invitación</span>
           </>
         )}
       </button>

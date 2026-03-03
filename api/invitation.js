@@ -1,5 +1,4 @@
 import {
-  getConfig,
   getInvitationByToken,
   hasSubmittedRsvp,
   normalizeToken,
@@ -82,10 +81,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const config = await getConfig();
-    const alreadySubmitted = config.dedupeByToken
-      ? await hasSubmittedRsvp(token)
-      : false;
+    const alreadySubmitted = await hasSubmittedRsvp(token);
 
     sendJson(res, 200, {
       ok: true,

@@ -6,7 +6,7 @@ export default function CeremonySection() {
     <Section className="bg-brand-cream px-6 text-brand-text" id="ceremony">
       <div className="w-full max-w-4xl mx-auto text-center">
         <h2 className="text-3xl sm:text-5xl font-light text-brand-text mb-8 mt-8">
-          Ceremonia + Celebracion
+          Ceremonia + Celebración
         </h2>
 
         <div className="w-full bg-brand-blush/65 rounded-xl py-6 px-4 mb-10">

@@ -1,10 +1,10 @@
 import {
   appendRow,
-  getConfig,
   getInvitationByToken,
   hasSubmittedRsvp,
   normalizeToken,
   parseBoolean,
+  updateRsvpEmailTracking,
 } from "./_lib/sheets.js";
 
 const ALLOWED_DIETARY_VALUES = new Set([
@@ -13,6 +13,7 @@ const ALLOWED_DIETARY_VALUES = new Set([
   "vegetariano",
   "celiaco",
 ]);
+const EMAIL_ERROR_MAX_CHARS = 200;
 
 function sendJson(res, status, payload) {
   res.status(status).json(payload);
@@ -65,6 +66,43 @@ function validatePayload(payload) {
   };
 }
 
+function truncateErrorMessage(error) {
+  const message = String(
+    error?.message ?? error ?? "Unknown email error",
+  ).trim();
+  return message.slice(0, EMAIL_ERROR_MAX_CHARS);
+}
+
+async function sendConfirmationEmail({ to, name }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.EMAIL_FROM;
+  const replyTo = process.env.EMAIL_REPLY_TO;
+
+  if (!apiKey || !from) {
+    throw new Error("Missing Resend configuration.");
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      reply_to: replyTo,
+      subject: "Confirmación de asistencia recibida",
+      html: `<p>Hola ${name || "invitado/a"}, recibimos la confirmación. Gracias por acompañarnos en este día especial.</p>`,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Resend request failed: ${response.status} ${errorBody}`);
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     sendJson(res, 405, { ok: false, code: "METHOD_NOT_ALLOWED" });
@@ -94,16 +132,13 @@ export default async function handler(req, res) {
       return;
     }
 
-    const config = await getConfig();
-    if (config.dedupeByToken) {
-      const alreadySubmitted = await hasSubmittedRsvp(token);
-      if (alreadySubmitted) {
-        sendJson(res, 409, { ok: false, code: "ALREADY_SUBMITTED" });
-        return;
-      }
+    const alreadySubmitted = await hasSubmittedRsvp(token);
+    if (alreadySubmitted) {
+      sendJson(res, 409, { ok: false, code: "ALREADY_SUBMITTED" });
+      return;
     }
 
-    await appendRow("rsvp", [
+    const appendResult = await appendRow("rsvp", [
       token,
       String(invitation.name ?? "").trim(),
       email,
@@ -111,9 +146,46 @@ export default async function handler(req, res) {
       dietaryRestriction,
       notes,
       new Date().toISOString(),
-      "web",
+      false,
+      "",
       "",
     ]);
+
+    const appendedRowIndex = appendResult.rowIndex;
+    if (!appendedRowIndex) {
+      throw new Error("Unable to determine appended RSVP row index.");
+    }
+
+    let emailTracking = {
+      emailSent: false,
+      emailSentAt: "",
+      emailError: "",
+    };
+
+    try {
+      await sendConfirmationEmail({
+        to: email,
+        name: String(invitation.name ?? "").trim(),
+      });
+
+      emailTracking = {
+        emailSent: true,
+        emailSentAt: new Date().toISOString(),
+        emailError: "",
+      };
+    } catch (error) {
+      emailTracking = {
+        emailSent: false,
+        emailSentAt: "",
+        emailError: truncateErrorMessage(error),
+      };
+    }
+
+    try {
+      await updateRsvpEmailTracking(appendedRowIndex, emailTracking);
+    } catch {
+      // RSVP submission should remain successful even if email tracking update fails.
+    }
 
     sendJson(res, 200, { ok: true });
   } catch {
