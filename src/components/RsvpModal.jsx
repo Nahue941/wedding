@@ -1,15 +1,7 @@
 import { CheckCheck, Mail, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
-
-function getTokenFromUrl() {
-  if (typeof window === "undefined") {
-    return "";
-  }
-
-  return new URLSearchParams(window.location.search).get("token")?.trim() ?? "";
-}
 
 function Toast({ message, onClose }) {
   useEffect(() => {
@@ -24,18 +16,24 @@ function Toast({ message, onClose }) {
   );
 }
 
-export default function RsvpModal() {
-  const token = useMemo(() => getTokenFromUrl(), []);
-  const localStorageKey = `${LOCAL_STORAGE_PREFIX}${token}`;
-  const hasBootstrappedRef = useRef(false);
+export default function RsvpModal({
+  token = "",
+  name = "",
+  initialAlreadySubmitted = false,
+}) {
+  const normalizedToken = String(token).trim();
+  const localStorageKey = useMemo(
+    () => `${LOCAL_STORAGE_PREFIX}${normalizedToken}`,
+    [normalizedToken],
+  );
+
   const [isOpen, setIsOpen] = useState(false);
-  const [isInitializing, setIsInitializing] = useState(Boolean(token));
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [invitationError, setInvitationError] = useState("");
-  const [name, setName] = useState("");
-  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [rsvpEnabled, setRsvpEnabled] = useState(true);
   const [toastMessage, setToastMessage] = useState("");
+  const [alreadySubmitted, setAlreadySubmitted] = useState(
+    Boolean(initialAlreadySubmitted),
+  );
   const [form, setForm] = useState({
     email: "",
     dietaryRestriction: "none",
@@ -68,65 +66,13 @@ export default function RsvpModal() {
   }, []);
 
   useEffect(() => {
-    if (hasBootstrappedRef.current) {
-      return;
-    }
-    hasBootstrappedRef.current = true;
+    const submittedLocally =
+      typeof window !== "undefined" &&
+      Boolean(normalizedToken) &&
+      localStorage.getItem(localStorageKey) === "1";
 
-    let cancelled = false;
-
-    async function bootstrapInvitationState() {
-      if (!token) {
-        setIsInitializing(false);
-        return;
-      }
-
-      setIsInitializing(true);
-      setInvitationError("");
-
-      const submittedLocally =
-        typeof window !== "undefined" &&
-        localStorage.getItem(localStorageKey) === "1";
-
-      if (submittedLocally) {
-        setAlreadySubmitted(true);
-      }
-
-      try {
-        const response = await fetch(
-          `/api/invitation?token=${encodeURIComponent(token)}`,
-        );
-        const data = await response.json();
-
-        if (!response.ok) {
-          if (!cancelled && !submittedLocally) {
-            setInvitationError("No pudimos validar tu invitación.");
-          }
-          return;
-        }
-
-        if (!cancelled) {
-          setName(data.invitation?.name?.trim?.() ?? "");
-          setAlreadySubmitted(
-            Boolean(data.alreadySubmitted) || submittedLocally,
-          );
-        }
-      } catch {
-        if (!cancelled && !submittedLocally) {
-          setInvitationError("No pudimos validar tu invitación.");
-        }
-      } finally {
-        if (!cancelled) {
-          setIsInitializing(false);
-        }
-      }
-    }
-
-    bootstrapInvitationState();
-    return () => {
-      cancelled = true;
-    };
-  }, [token, localStorageKey]);
+    setAlreadySubmitted(Boolean(initialAlreadySubmitted) || submittedLocally);
+  }, [initialAlreadySubmitted, localStorageKey, normalizedToken]);
 
   function openModal() {
     setIsOpen(true);
@@ -143,12 +89,12 @@ export default function RsvpModal() {
   async function onSubmit(event) {
     event.preventDefault();
 
-    if (!token || alreadySubmitted || invitationError || isInitializing) {
+    if (!normalizedToken || alreadySubmitted) {
       return;
     }
 
     const payload = {
-      token: token.trim(),
+      token: normalizedToken,
       email: form.email.trim(),
       dietaryRestriction: form.dietaryRestriction.trim(),
       notes: form.notes.trim(),
@@ -194,7 +140,7 @@ export default function RsvpModal() {
     }
   }
 
-  if (!token || !rsvpEnabled) {
+  if (!normalizedToken || !rsvpEnabled) {
     return null;
   }
 
@@ -232,15 +178,7 @@ export default function RsvpModal() {
               </button>
             </div>
 
-            {isInitializing && (
-              <p className="text-sm text-neutral-700">Cargando...</p>
-            )}
-
-            {!isInitializing && invitationError && (
-              <p className="text-sm text-red-600">{invitationError}</p>
-            )}
-
-            {!isInitializing && !invitationError && alreadySubmitted && (
+            {alreadySubmitted ? (
               <div className="space-y-3">
                 <h4 className="text-lg sm:text-xl font-semibold text-brand-text">
                   ¡Gracias por confirmar la asistencia!
@@ -250,9 +188,7 @@ export default function RsvpModal() {
                   día.
                 </p>
               </div>
-            )}
-
-            {!isInitializing && !invitationError && !alreadySubmitted && (
+            ) : (
               <form className="space-y-4" onSubmit={onSubmit}>
                 <label className="block text-sm text-neutral-700">
                   Nombre:

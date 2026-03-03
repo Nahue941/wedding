@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 RSVP_GOOGLE_SHEETS_SPEC.md
+.vercel
+.env*.local

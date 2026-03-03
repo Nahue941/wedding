@@ -27,6 +27,13 @@ function sendJson(res, status, payload) {
   res.status(status).json(payload);
 }
 
+function getErrorDetails(error) {
+  return {
+    message: String(error?.message ?? error ?? "Unknown error"),
+    stack: String(error?.stack ?? "").split("\n").slice(0, 6).join("\n"),
+  };
+}
+
 function isAllowedHost(host) {
   if (!host) {
     return false;
@@ -91,7 +98,23 @@ export default async function handler(req, res) {
       },
       alreadySubmitted,
     });
-  } catch {
+  } catch (error) {
+    const details = getErrorDetails(error);
+    console.error("[api/invitation] INTERNAL_ERROR", {
+      host: String(req.headers.host ?? ""),
+      origin: String(req.headers.origin ?? ""),
+      details,
+    });
+
+    if (process.env.NODE_ENV !== "production") {
+      sendJson(res, 500, {
+        ok: false,
+        code: "INTERNAL_ERROR",
+        details,
+      });
+      return;
+    }
+
     sendJson(res, 500, { ok: false, code: "INTERNAL_ERROR" });
   }
 }

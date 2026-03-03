@@ -1,5 +1,6 @@
 import { EASING, TRANSITION_TIME } from "../utils/constants";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
@@ -7,20 +8,74 @@ import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
 import InfoSection from "../components/Sections/InfoSection";
 import RsvpModal from "../components/RsvpModal";
-import { useParams } from "react-router-dom";
 
 export default function Invitation() {
   const { token } = useParams();
+  const navigate = useNavigate();
 
-  const hasToken = useMemo(() => Boolean(token?.trim()), [token]);
-  const [opened, setOpened] = useState(!hasToken);
+  const normalizedToken = String(token ?? "").trim();
+  const [isValidating, setIsValidating] = useState(true);
+  const [isTokenValid, setIsTokenValid] = useState(false);
+  const [invitationName, setInvitationName] = useState("");
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function validateToken() {
+      if (!normalizedToken) {
+        navigate("/la-boda", { replace: true });
+        return;
+      }
+
+      setIsValidating(true);
+      setIsTokenValid(false);
+      setOpened(false);
+
+      try {
+        const response = await fetch(
+          `/api/invitation?token=${encodeURIComponent(normalizedToken)}`,
+        );
+        const data = await response.json();
+
+        if (!response.ok) {
+          navigate("/la-boda", { replace: true });
+          return;
+        }
+
+        if (!cancelled) {
+          setInvitationName(data.invitation?.name?.trim?.() ?? "");
+          setAlreadySubmitted(Boolean(data.alreadySubmitted));
+          setIsTokenValid(true);
+        }
+      } catch {
+        navigate("/la-boda", { replace: true });
+      } finally {
+        if (!cancelled) {
+          setIsValidating(false);
+        }
+      }
+    }
+
+    validateToken();
+    return () => {
+      cancelled = true;
+    };
+  }, [navigate, normalizedToken]);
+
+  if (isValidating || !isTokenValid) {
+    return null;
+  }
 
   return (
     <div className="relative">
-      {!opened && hasToken && (
-        <EnvelopeIntro onFinish={() => setOpened(true)} />
-      )}
-      <RsvpModal />
+      {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
+      <RsvpModal
+        token={normalizedToken}
+        name={invitationName}
+        initialAlreadySubmitted={alreadySubmitted}
+      />
 
       <div
         style={{
