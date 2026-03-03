@@ -29,7 +29,6 @@ function readBody(req) {
 function validatePayload(payload) {
   const token = normalizeToken(payload.token);
   const email = String(payload.email ?? "").trim();
-  const phone = String(payload.phone ?? "").trim();
   const dietaryRestriction = String(payload.dietaryRestriction ?? "").trim();
   const notes = String(payload.notes ?? "").trim();
 
@@ -39,10 +38,6 @@ function validatePayload(payload) {
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!isValidEmail) {
-    return { ok: false };
-  }
-
-  if (phone.length < 6) {
     return { ok: false };
   }
 
@@ -59,7 +54,6 @@ function validatePayload(payload) {
     value: {
       token,
       email,
-      phone,
       dietaryRestriction,
       notes,
     },
@@ -118,7 +112,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const { token, email, phone, dietaryRestriction, notes } = validation.value;
+    const { token, email, dietaryRestriction, notes } = validation.value;
     const invitation = await getInvitationByToken(token);
 
     if (!invitation) {
@@ -142,7 +136,7 @@ export default async function handler(req, res) {
       token,
       String(invitation.name ?? "").trim(),
       email,
-      phone,
+      "",
       dietaryRestriction,
       notes,
       new Date().toISOString(),

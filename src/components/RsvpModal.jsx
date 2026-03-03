@@ -38,7 +38,6 @@ export default function RsvpModal() {
   const [toastMessage, setToastMessage] = useState("");
   const [form, setForm] = useState({
     email: "",
-    phone: "",
     dietaryRestriction: "none",
     notes: "",
   });
@@ -151,12 +150,11 @@ export default function RsvpModal() {
     const payload = {
       token: token.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim(),
       dietaryRestriction: form.dietaryRestriction.trim(),
       notes: form.notes.trim(),
     };
 
-    if (!payload.email || !payload.phone || payload.phone.length < 6) {
+    if (!payload.email) {
       setToastMessage("Revisá los datos del formulario.");
       return;
     }
@@ -275,21 +273,6 @@ export default function RsvpModal() {
                       updateField("email", event.target.value)
                     }
                     required
-                    disabled={isSubmitting}
-                    className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
-                  />
-                </label>
-
-                <label className="block text-sm text-neutral-700">
-                  Teléfono
-                  <input
-                    type="tel"
-                    value={form.phone}
-                    onChange={(event) =>
-                      updateField("phone", event.target.value)
-                    }
-                    required
-                    minLength={6}
                     disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   />
