@@ -10,7 +10,7 @@ export default function Hero({ opened }) {
 
   return (
     <Section
-      className="relative overflow-hidden h-[80dvh] bg-brand-wine"
+      className="relative overflow-hidden h-[75vh] bg-brand-wine"
       centered={false}
     >
       {opened && <HeroCarousel images={images} />}
