@@ -1,4 +1,4 @@
-import { CheckCheck, Mail, X } from "lucide-react";
+import { CheckCheck, Mail, PartyPopper, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
@@ -137,8 +137,6 @@ export default function RsvpModal({
       }
 
       setAlreadySubmitted(true);
-      setToastMessage("Confirmación enviada.");
-      closeModal();
     } catch {
       setToastMessage("Ocurrió un error. Intentá nuevamente.");
     } finally {
@@ -173,8 +171,7 @@ export default function RsvpModal({
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4">
           <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-brand-text">RSVP</h3>
+            <div className="flex items-center justify-end">
               <button
                 type="button"
                 onClick={closeModal}
@@ -186,17 +183,20 @@ export default function RsvpModal({
 
             {alreadySubmitted ? (
               <div className="space-y-3">
-                <h4 className="text-lg sm:text-xl font-semibold text-brand-text">
+                <h4 className="text-lg sm:text-xl font-semibold text-brand-text text-center">
                   ¡Gracias por confirmar la asistencia!
                 </h4>
-                <p className="text-sm text-neutral-700">
+                <p className="text-sm text-neutral-700 text-center">
                   Nos vemos el 25 de Septiembre para festejar juntos este gran
                   día.
                 </p>
+                <div className="flex items-center justify-center my-4">
+                  <PartyPopper size={40} />
+                </div>
               </div>
             ) : (
               <form className="space-y-4" onSubmit={onSubmit}>
-                <div className="space-y-2">
+                <div className="space-y-2 text-center mb-6">
                   <h2 className="text-xl font-semibold text-brand-text">
                     ¡Hola, {displayName}!
                   </h2>

@@ -20,11 +20,11 @@ export default function InfoSection() {
             <strong>Ellas:</strong> vestidos largos
           </p>
 
-          <p className="mt-4 font-medium">Atencion mujeres</p>
+          <p className="mt-4 font-medium">Atención mujeres</p>
 
           <p>
             Esta totalmente prohibido usar blanco y tonos claros, esos colores
-            estan reservados para la novia.
+            están reservados para la novia.
           </p>
         </div>
       ),
@@ -33,16 +33,16 @@ export default function InfoSection() {
       id: "menu",
       title: "Hay menu especial? Si",
       content: (
-        <p>Si tenes alguna restriccion alimentaria, avisanos en el RSVP.</p>
+        <p>Si tenes alguna restricción alimentaria, avisanos en el RSVP.</p>
       ),
     },
     {
-      id: "ninos",
-      title: "Podemos llevar ninos? No",
+      id: "niños",
+      title: "Podemos llevar niños? No",
       content: (
         <p>
           Queremos que esta noche la disfruten relajados, por eso sera una
-          celebracion solo para adultos.
+          celebración solo para adultos.
         </p>
       ),
     },
@@ -59,13 +59,13 @@ export default function InfoSection() {
     <Section className="bg-brand-smoke px-6 text-brand-cream" id="info">
       <div className="w-full max-w-3xl mx-auto flex flex-col gap-10 mt-8">
         <h2 className="text-3xl sm:text-5xl font-light text-center text-brand-cream">
-          Informacion Util
+          Información Util
         </h2>
 
         <Accordion items={accordionItems} />
 
         <p className="text-center text-lg text-brand-cream mt-6 mb-8">
-          Que no pare la fiesta!
+          ¡Que no pare la fiesta!
         </p>
       </div>
     </Section>
