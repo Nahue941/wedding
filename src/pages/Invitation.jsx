@@ -1,4 +1,5 @@
 import { EASING, TRANSITION_TIME } from "../utils/constants";
+import { useMemo, useState } from "react";
 
 import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
@@ -6,23 +7,19 @@ import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
 import InfoSection from "../components/Sections/InfoSection";
 import RsvpModal from "../components/RsvpModal";
-import { useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 
-function hasUrlToken() {
-  if (typeof window === "undefined") {
-    return false;
-  }
+export default function Invitation() {
+  const { token } = useParams();
 
-  return Boolean(new URLSearchParams(window.location.search).get("token")?.trim());
-}
-
-export default function Home() {
-  const hasToken = useMemo(() => hasUrlToken(), []);
+  const hasToken = useMemo(() => Boolean(token?.trim()), [token]);
   const [opened, setOpened] = useState(!hasToken);
 
   return (
     <div className="relative">
-      {!opened && hasToken && <EnvelopeIntro onFinish={() => setOpened(true)} />}
+      {!opened && hasToken && (
+        <EnvelopeIntro onFinish={() => setOpened(true)} />
+      )}
       <RsvpModal />
 
       <div
