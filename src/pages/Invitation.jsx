@@ -17,6 +17,7 @@ export default function Invitation() {
   const [isValidating, setIsValidating] = useState(true);
   const [isTokenValid, setIsTokenValid] = useState(false);
   const [invitationName, setInvitationName] = useState("");
+  const [guestCount, setGuestCount] = useState(1);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [opened, setOpened] = useState(false);
 
@@ -46,6 +47,8 @@ export default function Invitation() {
 
         if (!cancelled) {
           setInvitationName(data.invitation?.name?.trim?.() ?? "");
+          const parsedGuestCount = Number(data.invitation?.guestCount);
+          setGuestCount(parsedGuestCount > 1 ? parsedGuestCount : 1);
           setAlreadySubmitted(Boolean(data.alreadySubmitted));
           setIsTokenValid(true);
         }
@@ -74,6 +77,7 @@ export default function Invitation() {
       <RsvpModal
         token={normalizedToken}
         name={invitationName}
+        guestCount={guestCount}
         initialAlreadySubmitted={alreadySubmitted}
       />
 

@@ -50,6 +50,15 @@ function isAllowedOrigin(origin) {
   return ALLOWED_ORIGINS.has(origin.toLowerCase());
 }
 
+function parseGuestCount(value) {
+  const parsed = Number.parseInt(String(value ?? "").trim(), 10);
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    return 1;
+  }
+
+  return parsed;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     sendJson(res, 405, { ok: false, code: "METHOD_NOT_ALLOWED" });
@@ -95,6 +104,7 @@ export default async function handler(req, res) {
       invitation: {
         token,
         name: String(invitation.name ?? "").trim(),
+        guestCount: parseGuestCount(invitation.guestCount),
       },
       alreadySubmitted,
     });

@@ -19,9 +19,11 @@ function Toast({ message, onClose }) {
 export default function RsvpModal({
   token = "",
   name = "",
+  guestCount = 1,
   initialAlreadySubmitted = false,
 }) {
   const normalizedToken = String(token).trim();
+  const displayName = String(name ?? "").trim() || "invitado/a";
   const localStorageKey = useMemo(
     () => `${LOCAL_STORAGE_PREFIX}${normalizedToken}`,
     [normalizedToken],
@@ -39,6 +41,10 @@ export default function RsvpModal({
     dietaryRestriction: "none",
     notes: "",
   });
+  const subtitle =
+    guestCount === 1
+      ? "Nos alegra mucho invitarte a compartir este día con nosotros."
+      : "Nos alegra mucho invitarlos a compartir este día con nosotros.";
 
   useEffect(() => {
     let cancelled = false;
@@ -190,15 +196,12 @@ export default function RsvpModal({
               </div>
             ) : (
               <form className="space-y-4" onSubmit={onSubmit}>
-                <label className="block text-sm text-neutral-700">
-                  Nombre:
-                  <input
-                    type="text"
-                    value={name}
-                    readOnly
-                    className="mt-1 w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-neutral-700"
-                  />
-                </label>
+                <div className="space-y-2">
+                  <h2 className="text-xl font-semibold text-brand-text">
+                    ¡Hola, {displayName}!
+                  </h2>
+                  <p className="text-sm text-neutral-700">{subtitle}</p>
+                </div>
 
                 <label className="block text-sm text-neutral-700">
                   Email
@@ -224,10 +227,10 @@ export default function RsvpModal({
                     disabled={isSubmitting}
                     className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"
                   >
-                    <option value="none">ninguna</option>
-                    <option value="vegano">vegano</option>
-                    <option value="vegetariano">vegetariano</option>
-                    <option value="celiaco">celiaco</option>
+                    <option value="none">Ninguna</option>
+                    <option value="vegano">Vegano</option>
+                    <option value="vegetariano">Vegetariano</option>
+                    <option value="celiaco">Celiaco</option>
                   </select>
                 </label>
 
