@@ -1,7 +1,6 @@
 import "./StoryPolaroids.css";
 
 import PolaroidCard from "./PolaroidCard";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -41,24 +40,11 @@ const POLAROID_ITEMS = [
 ];
 
 function StoryPolaroids() {
-  const wrapperRef = useRef(null);
-  const contentRef = useRef(null);
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  const containerRef = useRef(null);
 
   useGSAP(
     () => {
-      if (ScrollSmoother.get()) {
-        ScrollSmoother.get().kill();
-      }
-      const smoother = ScrollSmoother.create({
-        wrapper: wrapperRef.current,
-        content: contentRef.current,
-        smooth: 1.2,
-        effects: true,
-        smoothTouch: 0.1,
-      });
-
-      const cards = gsap.utils.toArray(".card");
+      const cards = gsap.utils.toArray(".card", containerRef.current);
       const settleOffsets = [120, 80, 40, 0];
       const initialRotations = [-1, 1, 0, 2];
       const finalRotations = [-4, 2, -2, 3];
@@ -85,63 +71,57 @@ function StoryPolaroids() {
             invalidateOnRefresh: true,
           },
         });
-      });
 
-      return () => smoother?.kill();
+        const image = card.querySelector(".story-polaroid-image");
+        const reveal = card.querySelector(".img-reveal-layer");
+
+        gsap.set(image, {
+          filter: "grayscale(100%) saturate(0%) brightness(1.45)",
+          opacity: 0.55,
+        });
+
+        gsap.set(reveal, {
+          opacity: 1,
+        });
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top " + (15 + 35 * i),
+          once: true,
+          onEnter: () => {
+            gsap.to(reveal, {
+              opacity: 0,
+              duration: 1,
+              ease: "power2.out",
+            });
+            gsap.to(image, {
+              filter: "grayscale(0%) saturate(100%) brightness(100%)",
+              opacity: 1,
+              duration: 1.2,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
     },
-    { scope: contentRef },
+    { scope: containerRef },
   );
 
   return (
-    <div id="smooth-wrapper" ref={wrapperRef}>
-      <div id="smooth-content" ref={contentRef}>
-        <div className="spacer"></div>
-        <div className="container">
-          <div className="stacked-cards">
-            {POLAROID_ITEMS.map((item, index) => (
-              <PolaroidCard
-                key={item.id}
-                // className="storyPolaroids__card"
-                imageSrc={item.imageSrc}
-                imageAlt={item.imageAlt}
-                caption={item.caption}
-                index={index}
-                date="25/09/2026"
-              />
-              /*
-
-                     <div className="card" key={picture.id}>
-                     <div className="img-wrapper">
-                     <img src={picture.imageSrc} alt={picture.imageAlt} />
-                     </div>
-                     <div className="card-content">
-                     <h1>{picture.caption}</h1>
-                     <p>{picture?.date || "25/09/2026"}</p>
-                     </div>
-                     */
-            ))}
-          </div>
-        </div>
+    <div className="container" ref={containerRef}>
+      <div className="stacked-cards">
+        {POLAROID_ITEMS.map((item, index) => (
+          <PolaroidCard
+            key={item.id}
+            imageSrc={item.imageSrc}
+            imageAlt={item.imageAlt}
+            caption={item.caption}
+            index={index}
+            date="25/09/2026"
+          />
+        ))}
       </div>
     </div>
-    // <section className="storyPolaroids">
-    //   <div className="storyPolaroids__inner">
-    //     <div className="storyPolaroids__pinArea" ref={pinRef}>
-    //       <div className="storyPolaroids__stack" ref={stackRef}>
-    //         {POLAROID_ITEMS.map((item, index) => (
-    //           <PolaroidCard
-    //             key={item.id}
-    //             className="storyPolaroids__card"
-    //             imageSrc={item.imageSrc}
-    //             imageAlt={item.imageAlt}
-    //             caption={item.caption}
-    //             index={index}
-    //           />
-    //         ))}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </section>
   );
 }
 

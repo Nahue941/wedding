@@ -1,18 +1,45 @@
 import Hero from "@components/Hero/Hero";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StoryPolaroids from "@components/StoryPolaroids";
-import { useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function Home() {
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
+  const wrapperRef = useRef(null);
+  const contentRef = useRef(null);
 
-  return <StoryPolaroids />;
-}
+  useGSAP(
+    () => {
+      if (ScrollSmoother.get()) {
+        ScrollSmoother.get().kill();
+      }
 
-{
-  /* <Hero opened /> */
-}
-{
-  /* <Hero opened />  */
+      const smoother = ScrollSmoother.create({
+        wrapper: wrapperRef.current,
+        content: contentRef.current,
+        smooth: 1.2,
+        effects: true,
+        smoothTouch: 0.1,
+      });
+
+      return () => smoother?.kill();
+    },
+    { scope: wrapperRef },
+  );
+
+  return (
+    <div id="smooth-wrapper" ref={wrapperRef}>
+      <div id="smooth-content" ref={contentRef}>
+        <Hero opened />
+        <section className="storyPolaroids-page-title">
+          <h2>Nuestra historia</h2>
+        </section>
+        <StoryPolaroids />
+      </div>
+    </div>
+  );
 }

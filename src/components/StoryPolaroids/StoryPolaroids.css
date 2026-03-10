@@ -34,6 +34,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .stacked-cards {
@@ -62,12 +63,24 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .img-wrapper img {
   width: 90%;
   height: 90%;
   object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.img-reveal-layer {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
 }
 
 .card-content {
@@ -76,4 +89,21 @@ body {
   align-items: center;
   justify-content: center;
   padding: 10px 10px;
+}
+
+.storyPolaroids-page-title {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  padding: 16px 0 20px;
+  background: rgba(226, 226, 226, 0.98);
+}
+
+.storyPolaroids-page-title h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #3c3c3c;
 }
