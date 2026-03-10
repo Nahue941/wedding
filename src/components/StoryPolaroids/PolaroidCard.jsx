@@ -1,11 +1,18 @@
+import styles from "./StoryPolaroids.module.css";
+
 function PolaroidCard({ imageSrc, imageAlt, caption, date, index }) {
   return (
-    <article className="card" data-polaroid-index={index}>
-      <div className="img-wrapper">
-        <img src={imageSrc} alt={imageAlt} className="story-polaroid-image" />
-        <span className="img-reveal-layer" aria-hidden="true" />
+    <article className={styles.card} data-polaroid-index={index}>
+      <div className={styles.imgWrapper}>
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className={styles.image}
+          data-polaroid-image
+        />
+        <span className={styles.revealLayer} aria-hidden="true" data-polaroid-reveal />
       </div>
-      <div className="card-content">
+      <div className={styles.cardContent}>
         <h1>{caption}</h1>
         <p>{date}</p>
       </div>

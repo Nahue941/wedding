@@ -1,0 +1,16 @@
+.storyPolaroidsPageTitle {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  padding: 16px 0 20px;
+  background: rgba(226, 226, 226, 0.98);
+}
+
+.storyPolaroidsPageTitle h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #3c3c3c;
+}

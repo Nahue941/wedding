@@ -5,6 +5,7 @@ import StoryPolaroids from "@components/StoryPolaroids";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import styles from "./Home.module.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -35,7 +36,7 @@ export default function Home() {
     <div id="smooth-wrapper" ref={wrapperRef}>
       <div id="smooth-content" ref={contentRef}>
         <Hero opened />
-        <section className="storyPolaroids-page-title">
+        <section className={styles.storyPolaroidsPageTitle}>
           <h2>Nuestra historia</h2>
         </section>
         <StoryPolaroids />

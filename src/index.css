@@ -18,6 +18,7 @@ html {
 
 body {
   font-family: var(--font-lato);
+  background-color: #e2e2e2;
 }
 
 button,
@@ -25,4 +26,13 @@ input,
 select,
 textarea {
   font-family: inherit;
+}
+
+#smooth-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+#smooth-content {
+  will-change: transform;
 }

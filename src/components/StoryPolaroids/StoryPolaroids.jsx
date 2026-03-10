@@ -1,4 +1,4 @@
-import "./StoryPolaroids.css";
+import styles from "./StoryPolaroids.module.css";
 
 import PolaroidCard from "./PolaroidCard";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -44,7 +44,7 @@ function StoryPolaroids() {
 
   useGSAP(
     () => {
-      const cards = gsap.utils.toArray(".card", containerRef.current);
+      const cards = gsap.utils.toArray("[data-polaroid-index]", containerRef.current);
       const settleOffsets = [120, 80, 40, 0];
       const initialRotations = [-1, 1, 0, 2];
       const finalRotations = [-4, 2, -2, 3];
@@ -64,7 +64,7 @@ function StoryPolaroids() {
             trigger: card,
             start: "top " + (15 + 35 * i),
             end: "bottom bottom",
-            endTrigger: ".container",
+            endTrigger: containerRef.current,
             scrub: true,
             pin: card,
             pinSpacing: false,
@@ -72,8 +72,8 @@ function StoryPolaroids() {
           },
         });
 
-        const image = card.querySelector(".story-polaroid-image");
-        const reveal = card.querySelector(".img-reveal-layer");
+        const image = card.querySelector("[data-polaroid-image]");
+        const reveal = card.querySelector("[data-polaroid-reveal]");
 
         gsap.set(image, {
           filter: "grayscale(100%) saturate(0%) brightness(1.45)",
@@ -108,8 +108,8 @@ function StoryPolaroids() {
   );
 
   return (
-    <div className="container" ref={containerRef}>
-      <div className="stacked-cards">
+    <div className={styles.container} ref={containerRef}>
+      <div className={styles.stackedCards}>
         {POLAROID_ITEMS.map((item, index) => (
           <PolaroidCard
             key={item.id}

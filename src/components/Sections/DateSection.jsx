@@ -8,7 +8,7 @@ export default function DateSection() {
 
   return (
     <Section className="bg-brand-wine px-6 text-brand-cream" id="date">
-      <div className="max-w-4xl w-full text-center text-brand-cream">
+      <div className="max-w-4xl w-full text-center text-brand-cream my-8">
         <h2 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-8">
           Nos casamos!
         </h2>
