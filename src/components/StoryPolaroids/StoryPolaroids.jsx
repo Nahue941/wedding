@@ -97,7 +97,7 @@ function StoryPolaroids() {
             gsap.to(image, {
               filter: "grayscale(0%) saturate(100%) brightness(100%)",
               opacity: 1,
-              duration: 1.2,
+              duration: 0.6,
               ease: "power2.out",
             });
           },
