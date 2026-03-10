@@ -1,87 +1,79 @@
-.storyPolaroids {
-  padding: 2.5rem 1rem;
-  display: flex;
-  justify-content: center;
-}
-
-.storyPolaroids__inner {
-  width: min(94vw, 640px);
-}
-
-.storyPolaroids__stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.storyPolaroids__card {
-  width: 100%;
-  max-width: 320px;
-}
-
-.storyPolaroids__polaroid {
-  width: 100%;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  background: #ffffff;
-  border-radius: 2px;
-  padding: 12px 12px 56px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  position: relative;
+}
+
+img {
   display: block;
-}
-
-.storyPolaroids__frame {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background: #ededed;
-  overflow: hidden;
-}
-
-.storyPolaroids__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.storyPolaroids__caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 16px;
-  margin: 0;
-  text-align: center;
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 0.95rem;
-  color: #333333;
-  letter-spacing: 0.02em;
+body {
+  background-color: #e2e2e2;
 }
 
-@media (min-width: 768px) {
-  .storyPolaroids {
-    padding: 3.5rem 1.5rem;
-  }
+#smooth-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
 
-  .storyPolaroids__inner {
-    width: min(92vw, 760px);
-  }
+#smooth-content {
+  will-change: transform;
+}
 
-  .storyPolaroids__stack {
-    gap: 1.5rem;
-  }
+.spacer,
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
 
-  .storyPolaroids__card {
-    max-width: 430px;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .storyPolaroids__polaroid {
-    padding: 14px 14px 64px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
-  }
+.stacked-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
 
-  .storyPolaroids__caption {
-    font-size: 1rem;
-    bottom: 18px;
-  }
+.card {
+  width: 100%;
+  min-height: 35vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0 10px 20px,
+    rgba(0, 0, 0, 0.2) 0 6px 6px;
+  background-color: #f2f2f2;
+  margin-bottom: 75vh;
+}
+
+.img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
 }

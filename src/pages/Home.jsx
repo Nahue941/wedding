@@ -7,15 +7,12 @@ export default function Home() {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
-  return (
-    <div className="relative">
-      <div className="transition-all opacity-100 scale-100">
-        <div className="snap-y snap-mandatory">
-          <Hero opened />
-          <StoryPolaroids />
-          <Hero opened />
-        </div>
-      </div>
-    </div>
-  );
+  return <StoryPolaroids />;
+}
+
+{
+  /* <Hero opened /> */
+}
+{
+  /* <Hero opened />  */
 }

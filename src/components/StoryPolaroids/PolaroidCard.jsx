@@ -1,13 +1,13 @@
-function PolaroidCard({ imageSrc, imageAlt, caption, className = "", index }) {
+function PolaroidCard({ imageSrc, imageAlt, caption, date, index }) {
   return (
-    <article
-      className={`storyPolaroids__polaroid ${className}`.trim()}
-      data-polaroid-index={index}
-    >
-      <div className="storyPolaroids__frame">
-        <img src={imageSrc} alt={imageAlt} className="storyPolaroids__image" />
+    <article className="card" data-polaroid-index={index}>
+      <div className="img-wrapper">
+        <img src={imageSrc} alt={imageAlt} />
       </div>
-      <p className="storyPolaroids__caption">{caption}</p>
+      <div className="card-content">
+        <h1>{caption}</h1>
+        <p>{date}</p>
+      </div>
     </article>
   );
 }
