@@ -1,10 +1,10 @@
-import Hero from "@components/Hero/Hero";
+﻿import Hero from "@components/Hero/Hero";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StoryPolaroids from "@components/StoryPolaroids";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./Home.module.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -12,6 +12,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 export default function Home() {
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && typeof history !== "undefined") {
+      history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   useGSAP(
     () => {
@@ -37,7 +44,7 @@ export default function Home() {
       <div id="smooth-content" ref={contentRef}>
         <Hero opened />
         <section className={styles.storyPolaroidsPageTitle}>
-          <h2>Nuestra historia</h2>
+          <h2 className="font-parisienne">Nuestra historia</h2>
         </section>
         <StoryPolaroids />
       </div>

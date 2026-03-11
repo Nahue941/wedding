@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const POLAROID_ITEMS = Array.from({ length: 7 }, (_, index) => {
+const POLAROID_ITEMS = Array.from({ length: 8 }, (_, index) => {
   const year = 2018 + index;
 
   return {
@@ -27,8 +27,12 @@ function StoryPolaroids() {
         "[data-polaroid-index]",
         containerRef.current,
       );
-      const settleOffsets = cards.map((_, index) => Math.max(120 - 40 * index, 0));
-      const initialRotations = cards.map((_, index) => [-1, 1, 0, 2][index % 4]);
+      const settleOffsets = cards.map((_, index) =>
+        Math.max(120 - 40 * index, 0),
+      );
+      const initialRotations = cards.map(
+        (_, index) => [-1, 1, 0, 2][index % 4],
+      );
       const finalRotations = cards.map((_, index) => [-4, 2, -2, 3][index % 4]);
 
       cards.forEach((card, i) => {
@@ -60,10 +64,12 @@ function StoryPolaroids() {
         gsap.set(image, {
           filter: "grayscale(100%) saturate(0%) brightness(1.45)",
           opacity: 0.55,
+          backgroundColor: "#f2f2f2",
         });
 
         gsap.set(reveal, {
           opacity: 1,
+          backgroundColor: "#f2f2f2",
         });
 
         ScrollTrigger.create({

@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  background: #ffedeb;
 }
 
 .stackedCards {
@@ -62,4 +63,6 @@
   align-items: center;
   justify-content: center;
   padding: 10px 10px;
+  font-family: var(--font-parisienne);
+  font-size: 1.5rem;
 }
