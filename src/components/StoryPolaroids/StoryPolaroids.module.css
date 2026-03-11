@@ -5,7 +5,25 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  background: #ffedeb;
+  background-color: #ffedeb;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/patterns/patter1.svg"), url("/patterns/patter2.svg");
+  background-repeat: repeat, repeat;
+  background-size:
+    263px 263px,
+    350px 350px;
+  background-position:
+    center center,
+    22px 22px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .stackedCards {
@@ -13,6 +31,8 @@
   flex-direction: column;
   align-items: center;
   width: 70%;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
