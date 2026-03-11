@@ -1,6 +1,8 @@
-﻿import { CheckCheck, Mail, PartyPopper, X } from "lucide-react";
-import * as Dialog from "@radix-ui/react-dialog";
+﻿import * as Dialog from "@radix-ui/react-dialog";
+
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
+import { CheckCheck, Mail, PartyPopper, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 const LOCAL_STORAGE_PREFIX = "rsvp_submitted_";
@@ -210,8 +212,8 @@ export default function RsvpModal({
                         ¡Gracias por confirmar la asistencia!
                       </h4>
                       <p className="text-sm text-neutral-700 text-center">
-                        Nos vemos el 25 de Septiembre para festejar juntos este gran
-                        dia.
+                        Nos vemos el 25 de Septiembre para festejar juntos este
+                        gran dia.
                       </p>
                       <div className="flex items-center justify-center my-4">
                         <PartyPopper size={40} />
@@ -245,7 +247,10 @@ export default function RsvpModal({
                         <select
                           value={form.dietaryRestriction}
                           onChange={(event) =>
-                            updateField("dietaryRestriction", event.target.value)
+                            updateField(
+                              "dietaryRestriction",
+                              event.target.value,
+                            )
                           }
                           disabled={isSubmitting}
                           className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2"

@@ -1,53 +1,35 @@
-import styles from "./StoryPolaroids.module.css";
-
-import PolaroidCard from "./PolaroidCard";
+﻿import PolaroidCard from "./PolaroidCard";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import styles from "./StoryPolaroids.module.css";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const POLAROID_ITEMS = [
-  {
-    id: "1",
-    imageSrc:
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Sample 1",
-    caption: "Sample",
-  },
-  {
-    id: "2",
-    imageSrc:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Sample 2",
-    caption: "Sample",
-  },
-  {
-    id: "3",
-    imageSrc:
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Sample 3",
-    caption: "Sample",
-  },
-  {
-    id: "4",
-    imageSrc:
-      "https://images.unsplash.com/photo-1516589091380-5d8e87df6999?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Sample 4",
-    caption: "Sample",
-  },
-];
+const POLAROID_ITEMS = Array.from({ length: 7 }, (_, index) => {
+  const year = 2018 + index;
+
+  return {
+    id: String(year),
+    imageSrc: `/images/${year}.jpeg`,
+    imageAlt: `Foto ${year}`,
+    caption: String(year),
+  };
+});
 
 function StoryPolaroids() {
   const containerRef = useRef(null);
 
   useGSAP(
     () => {
-      const cards = gsap.utils.toArray("[data-polaroid-index]", containerRef.current);
-      const settleOffsets = [120, 80, 40, 0];
-      const initialRotations = [-1, 1, 0, 2];
-      const finalRotations = [-4, 2, -2, 3];
+      const cards = gsap.utils.toArray(
+        "[data-polaroid-index]",
+        containerRef.current,
+      );
+      const settleOffsets = cards.map((_, index) => Math.max(120 - 40 * index, 0));
+      const initialRotations = cards.map((_, index) => [-1, 1, 0, 2][index % 4]);
+      const finalRotations = cards.map((_, index) => [-4, 2, -2, 3][index % 4]);
 
       cards.forEach((card, i) => {
         gsap.set(card, {
@@ -117,7 +99,6 @@ function StoryPolaroids() {
             imageAlt={item.imageAlt}
             caption={item.caption}
             index={index}
-            date="25/09/2026"
           />
         ))}
       </div>

@@ -10,11 +10,15 @@ function PolaroidCard({ imageSrc, imageAlt, caption, date, index }) {
           className={styles.image}
           data-polaroid-image
         />
-        <span className={styles.revealLayer} aria-hidden="true" data-polaroid-reveal />
+        <span
+          className={styles.revealLayer}
+          aria-hidden="true"
+          data-polaroid-reveal
+        />
       </div>
       <div className={styles.cardContent}>
         <h1>{caption}</h1>
-        <p>{date}</p>
+        {date ? <p>{date}</p> : null}
       </div>
     </article>
   );
