@@ -160,7 +160,7 @@ export default function RsvpModal({
           {alreadySubmitted ? (
             <span className="inline-flex items-center gap-2">
               <CheckCheck size={16} />
-              <span>Asistencia Confirmada</span>
+              <span className="text-lg">Asistencia Confirmada</span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-2">

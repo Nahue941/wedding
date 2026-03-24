@@ -30,7 +30,7 @@ export default function Accordion({
         return (
           <div
             key={item.id}
-            className="bg-white/85 rounded-2xl shadow-md overflow-hidden"
+            className="bg-brand-cream/95 rounded-2xl shadow-md overflow-hidden"
           >
             {/* Header */}
             <button
@@ -39,7 +39,7 @@ export default function Accordion({
                 w-full flex items-center justify-between
                 px-6 py-5
                 text-left
-                text-lg font-medium
+                text-xl font-medium
                 text-brand-wine
                 cursor-pointer
                 transition-all duration-300 ease-out
@@ -65,7 +65,7 @@ export default function Accordion({
               `}
             >
               <div className="overflow-hidden px-6 pb-6">
-                <div className="text-sm text-brand-wine/80 leading-relaxed">
+                <div className="text-lg text-brand-wine/80 leading-relaxed">
                   {item.content}
                 </div>
               </div>

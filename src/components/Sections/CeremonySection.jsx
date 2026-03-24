@@ -9,7 +9,7 @@ export default function CeremonySection() {
           Ceremonia & Celebración
         </h2>
 
-        <div className="w-full bg-brand-wine/85 rounded-xl py-6 px-4 mb-10">
+        <div className="w-full bg-brand-wine/95 rounded-xl py-6 px-4 mb-10">
           <div className="grid grid-cols-2 divide-x divide-brand-blush/30">
             <div className="flex flex-col items-center justify-center">
               <span className="text-3xl font-medium text-brand-blush">25</span>
@@ -51,8 +51,10 @@ export default function CeremonySection() {
           className="
           px-8 py-4
           mb-8
-          bg-brand-text
+          bg-brand-text/95
           text-brand-cream
+          text-xl
+          font-semibold
           rounded-full
           gap-2.5
           tracking-wide
@@ -64,7 +66,7 @@ export default function CeremonySection() {
           cursor-pointer
           inline-flex items-center justify-center"
         >
-          <MapPin size={18} className="shrink-0 -translate-y-px" />
+          <MapPin size={24} className="shrink-0 -translate-y-px" />
           UBICACIÓN
         </a>
       </div>

@@ -10,7 +10,7 @@ export default function DateSection() {
     <Section className="bg-brand-wine px-6 text-brand-cream" id="date">
       <div className="max-w-4xl w-full text-center text-brand-cream my-8">
         <h2 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-8">
-          Nos casamos!
+          ¡Nos casamos!
         </h2>
 
         <p className="text-lg sm:text-2xl font-light mb-8 leading-relaxed">
@@ -35,7 +35,8 @@ export default function DateSection() {
             bg-brand-cream
             text-brand-text
             rounded-full
-            text-lg
+            text-xl
+            font-semibold
             tracking-wide
             shadow-md
             transition-all duration-300 ease-out
@@ -46,7 +47,7 @@ export default function DateSection() {
             active:scale-95
             "
         >
-          <Calendar />
+          <Calendar size={24} className="shrink-0 -translate-y-px" />
           AGENDAR FECHA
         </a>
       </div>

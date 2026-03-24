@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Parisienne&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Parisienne&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -9,7 +9,7 @@
   --color-brand-text: #3d0007;
   --color-brand-black: #162127;
   --font-parisienne: "Parisienne", cursive;
-  --font-lato: "Lato", sans-serif;
+  --font-lato: "Cormorant Garamond", serif;
 }
 
 html {
@@ -53,4 +53,5 @@ textarea {
 .subtle-pulse {
   animation: subtle-pulse 2.6s ease-in-out infinite;
 }
+
 

@@ -1,3 +1,13 @@
+import {
+  Baby,
+  Car,
+  ClipboardCheck,
+  Clock,
+  Shirt,
+  UserPlus,
+  Utensils,
+} from "lucide-react";
+
 import Accordion from "../Accordion";
 import InstagramIcon from "../Icons/InstagramIcon";
 import Section from "../SectionComponent";
@@ -6,7 +16,12 @@ export default function InfoSection() {
   const accordionItems = [
     {
       id: "dresscode",
-      title: "Que me pongo?",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Shirt size={18} />
+          ¿Qué me pongo?
+        </span>
+      ),
       content: (
         <div className="space-y-3">
           <p>
@@ -32,26 +47,113 @@ export default function InfoSection() {
     },
     {
       id: "menu",
-      title: "Hay menu especial? Si",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Utensils size={18} />
+          ¿Hay menu especial?
+        </span>
+      ),
       content: (
-        <p>Si tenes alguna restricción alimentaria, avisanos en el RSVP.</p>
+        <>
+          <p>Si.</p>
+          <p>
+            Si tenés alguna restricción alimentaria,{" "}
+            <span className="font-bold">avisanos en la confirmación.</span>
+          </p>
+        </>
       ),
     },
     {
       id: "niños",
-      title: "Podemos llevar niños? No",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Baby size={18} />
+          ¿Podemos llevar niños?
+        </span>
+      ),
       content: (
-        <p>
-          Queremos que esta noche la disfruten relajados, por eso sera una
-          celebración solo para adultos.
-        </p>
+        <>
+          <p>No.</p>
+          <p>
+            La celebración será solo para{" "}
+            <span className="font-bold">mayores de 16 años</span>. Queremos que
+            todos puedan disfrutar la noche con tranquilidad.
+          </p>
+        </>
       ),
     },
     {
       id: "auto",
-      title: "Puedo ir con el auto? Si",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Car size={18} />
+          ¿Puedo ir con el auto?
+        </span>
+      ),
       content: (
-        <p>El salon cuenta con XX espacios para que puedan dejar sus autos.</p>
+        <>
+          <p>Si.</p>
+          <p>
+            El salon cuenta con espacios para que puedan dejar sus vehículos.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "hora",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Clock size={18} />
+          ¿A qué hora debo llegar?
+        </span>
+      ),
+      content: (
+        <>
+          <p>Nuestra ceremonia comenzará puntual a las 20:00 hs.</p>
+          <p>
+            <span className="font-bold">
+              Les pedimos que lleguen entre 15 y 20 minutos antes
+            </span>
+            , así podemos comenzar a tiempo.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "acompañante",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <UserPlus size={22} />
+          ¿Puedo llevar un invitado/acompañante?
+        </span>
+      ),
+      content: (
+        <>
+          <p>Si tu invitación incluye un acompañante, ¡si!</p>
+          <p>
+            De lo contrario, nos gustaría que nuestra boda fuera un evento
+            íntimo, solo con familiares y amigos cercanos.
+          </p>
+          <p>Ante la duda, !consultanos!</p>
+        </>
+      ),
+    },
+    {
+      id: "confirmacion",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <ClipboardCheck size={18} />
+          ¿Cómo confirmo asistencia?
+        </span>
+      ),
+      content: (
+        <>
+          <p>
+            Podés confirmar desde esta misma invitación tocando el botón
+            "confirmar asistencia" y llenando el formulario.
+          </p>
+          <p className="font-bold">Te pedimos hacerlo antes del 1/9/26.</p>
+        </>
       ),
     },
   ];
