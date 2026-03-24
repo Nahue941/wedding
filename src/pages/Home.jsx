@@ -1,17 +1,19 @@
 import { EASING, TRANSITION_TIME } from "../utils/constants";
+import AudioToggleButton from "../components/AudioToggleButton";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { startLoopedAudio } from "../utils/audio";
 
 import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
 import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Hero from "../components/Hero/Hero";
+import HomeStyles from "./Home.module.css";
 import InfoSection from "../components/Sections/InfoSection";
 import RsvpModal from "../components/RsvpModal";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StoryPolaroids from "../components/StoryPolaroids";
-import HomeStyles from "./Home.module.css";
+import gsap from "gsap";
 
 const INVITATION_TOKEN_KEY = "invitation_token";
 
@@ -30,8 +32,28 @@ export default function Home() {
   const [guestCount, setGuestCount] = useState(1);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [opened, setOpened] = useState(false);
+  const audioRef = useRef(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+    if (audio.paused) {
+      audio.volume = 0.3;
+      const playPromise = audio.play();
+      if (playPromise?.then) {
+        playPromise.then(() => setIsAudioPlaying(true)).catch(() => {});
+      } else {
+        setIsAudioPlaying(true);
+      }
+      return;
+    }
+    audio.pause();
+    setIsAudioPlaying(false);
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -110,7 +132,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (isValidating || !isTokenValid || !wrapperRef.current || !contentRef.current) {
+    if (
+      isValidating ||
+      !isTokenValid ||
+      !wrapperRef.current ||
+      !contentRef.current
+    ) {
       return;
     }
 
@@ -145,9 +172,18 @@ export default function Home() {
 
   return (
     <div className="relative">
+      <audio ref={audioRef} src="/audio/para-siempre.mp3" preload="auto" />
+      {opened && (
+        <AudioToggleButton isPlaying={isAudioPlaying} onToggle={toggleAudio} />
+      )}
       <div id="smooth-wrapper" ref={wrapperRef}>
         <div id="smooth-content" ref={contentRef}>
-          {!opened && <EnvelopeIntro onFinish={() => setOpened(true)} />}
+          {!opened && (
+            <EnvelopeIntro
+              onFinish={() => setOpened(true)}
+              onOpen={() => startLoopedAudio(audioRef, setIsAudioPlaying, 0.3)}
+            />
+          )}
           <RsvpModal
             token={normalizedToken}
             name={invitationName}
@@ -181,4 +217,11 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+
+
+
 
