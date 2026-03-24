@@ -1,4 +1,5 @@
 import Accordion from "../Accordion";
+import InstagramIcon from "../Icons/InstagramIcon";
 import Section from "../SectionComponent";
 
 export default function InfoSection() {
@@ -64,9 +65,21 @@ export default function InfoSection() {
 
         <Accordion items={accordionItems} />
 
-        <p className="text-center text-lg text-brand-cream mt-6 mb-8">
-          ¡Que no pare la fiesta!
-        </p>
+        <div className="mt-6 mb-8 flex flex-col items-center gap-4 text-center">
+          <p className="text-lg text-brand-cream">
+            Seguinos en nuestro instagram de la fiesta para enterarte las
+            novedades
+          </p>
+          <a
+            href="https://www.instagram.com/boda.naty.nahue/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram boda naty nahue"
+            className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-cream/10 text-brand-cream transition-transform duration-200 hover:scale-105"
+          >
+            <InstagramIcon size={40} />
+          </a>
+        </div>
       </div>
     </Section>
   );
