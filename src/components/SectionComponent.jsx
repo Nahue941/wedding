@@ -1,10 +1,10 @@
 import clsx from "clsx";
 
-export default function Section({ children, className, centered = true }) {
+export default function Section({ children, className, centered = true, minHeightClass = "min-h-[60vh]" }) {
   return (
     <section
       className={clsx(
-        "min-h-[60vh] snap-start",
+        `${minHeightClass} snap-start`,
         centered && "flex items-center justify-center",
         className,
       )}
@@ -13,3 +13,4 @@ export default function Section({ children, className, centered = true }) {
     </section>
   );
 }
+

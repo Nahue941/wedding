@@ -160,12 +160,14 @@ export default function RsvpModal({
           {alreadySubmitted ? (
             <span className="inline-flex items-center gap-2">
               <CheckCheck size={16} />
-              <span className="text-lg">Asistencia Confirmada</span>
+              <span className="text-base sm:text-lg">
+                Asistencia Confirmada
+              </span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-2">
               <Mail size={16} />
-              <span>Confirmar asistencia</span>
+              <span className="text-base sm:text-lg">Confirmar asistencia</span>
             </span>
           )}
         </button>
@@ -286,7 +288,7 @@ export default function RsvpModal({
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full rounded-lg bg-brand-wine px-4 py-2.5 text-brand-cream disabled:cursor-not-allowed disabled:opacity-60"
+                        className="w-full rounded-lg bg-brand-wine px-4 py-2.5 text-brand-cream disabled:cursor-not-allowed disabled:opacity-60 text-lg"
                       >
                         {isSubmitting ? "Enviando..." : "Confirmar asistencia"}
                       </button>

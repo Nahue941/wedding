@@ -9,11 +9,11 @@ export default function DateSection() {
   return (
     <Section className="bg-brand-wine px-6 text-brand-cream" id="date">
       <div className="max-w-4xl w-full text-center text-brand-cream my-8">
-        <h2 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-8">
+        <h2 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-8 sm:mb-16">
           ¡Nos casamos!
         </h2>
 
-        <p className="font-parisienne text-2xl sm:text-3xl mb-2 opacity-90">
+        <p className="font-parisienne text-2xl sm:text-4xl mb-2 sm:mb-6 opacity-90">
           Faltan para la boda...
         </p>
 
@@ -21,7 +21,7 @@ export default function DateSection() {
           <Countdown targetDate={weddingDate} />
         </div>
 
-        <p className="text-lg sm:text-2xl font-light mb-2 leading-relaxed">
+        <p className="text-lg sm:text-2xl font-light mb-2 sm:mb-6 leading-relaxed">
           Guardate la fecha y preparate para festejar con nosotros.
         </p>
         <a

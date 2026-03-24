@@ -181,7 +181,7 @@ export default function InfoSection() {
         <Accordion items={accordionItems} />
 
         <div className="mt-6 mb-8 flex flex-col items-center gap-4 text-center">
-          <p className="text-lg text-brand-cream">
+          <p className="text-lg sm:text-2xl text-brand-cream">
             Seguinos en nuestro instagram de la fiesta para enterarte las
             novedades
           </p>
@@ -190,7 +190,7 @@ export default function InfoSection() {
             target="_blank"
             rel="noreferrer"
             aria-label="Instagram boda naty nahue"
-            className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-cream/10 text-brand-cream transition-transform duration-200 hover:scale-105"
+            className="inline-flex h-14 w-14 sm:h-18 sm:w-18 items-center justify-center rounded-full bg-brand-cream/10 text-brand-cream transition-transform duration-200 hover:scale-105"
           >
             <InstagramIcon size={40} />
           </a>
