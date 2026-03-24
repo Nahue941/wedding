@@ -132,6 +132,21 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    const body = document.body;
+    if (!opened) {
+      const previousOverflow = body.style.overflow;
+      body.style.overflow = "hidden";
+      return () => {
+        body.style.overflow = previousOverflow;
+      };
+    }
+    body.style.overflow = "";
+  }, [opened]);
+
+  useEffect(() => {
     if (
       isValidating ||
       !isTokenValid ||
@@ -176,6 +191,14 @@ export default function Home() {
       {opened && (
         <AudioToggleButton isPlaying={isAudioPlaying} onToggle={toggleAudio} />
       )}
+      {opened && (
+        <RsvpModal
+          token={normalizedToken}
+          name={invitationName}
+          guestCount={guestCount}
+          initialAlreadySubmitted={alreadySubmitted}
+        />
+      )}
       <div id="smooth-wrapper" ref={wrapperRef}>
         <div id="smooth-content" ref={contentRef}>
           {!opened && (
@@ -184,13 +207,6 @@ export default function Home() {
               onOpen={() => startLoopedAudio(audioRef, setIsAudioPlaying, 0.3)}
             />
           )}
-          <RsvpModal
-            token={normalizedToken}
-            name={invitationName}
-            guestCount={guestCount}
-            initialAlreadySubmitted={alreadySubmitted}
-          />
-
           <div
             style={{
               transitionDuration: TRANSITION_TIME,
@@ -217,6 +233,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 
 

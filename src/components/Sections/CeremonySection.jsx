@@ -9,20 +9,20 @@ export default function CeremonySection() {
           Ceremonia + Celebración
         </h2>
 
-        <div className="w-full bg-brand-blush/65 rounded-xl py-6 px-4 mb-10">
-          <div className="grid grid-cols-2 divide-x divide-brand-smoke/30">
+        <div className="w-full bg-brand-wine/85 rounded-xl py-6 px-4 mb-10">
+          <div className="grid grid-cols-2 divide-x divide-brand-blush/30">
             <div className="flex flex-col items-center justify-center">
-              <span className="text-3xl font-medium text-brand-black">25</span>
-              <span className="text-sm tracking-wide text-brand-black mt-1">
+              <span className="text-3xl font-medium text-brand-blush">25</span>
+              <span className="text-sm tracking-wide text-brand-blush mt-1">
                 SEPTIEMBRE
               </span>
             </div>
 
             <div className="flex flex-col items-center justify-center">
-              <span className="text-3xl font-medium text-brand-black">
+              <span className="text-3xl font-medium text-brand-blush">
                 20:00
               </span>
-              <span className="text-sm tracking-wide text-brand-black mt-1">
+              <span className="text-sm tracking-wide text-brand-blush mt-1">
                 HORAS
               </span>
             </div>

@@ -1,6 +1,5 @@
 ﻿import * as Dialog from "@radix-ui/react-dialog";
 
-// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCheck, Mail, PartyPopper, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -150,7 +149,13 @@ export default function RsvpModal({
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="fixed bottom-6 right-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine ring-offset-2 ring-offset-brand-cream"
+          className={`
+            fixed bottom-12 right-4 z-40 inline-flex items-center gap-2
+            rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream
+            shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine
+            ring-offset-2 ring-offset-brand-cream
+            ${alreadySubmitted ? "" : "subtle-pulse"}
+          `}
         >
           {alreadySubmitted ? (
             <span className="inline-flex items-center gap-2">
@@ -160,7 +165,7 @@ export default function RsvpModal({
           ) : (
             <span className="inline-flex items-center gap-2">
               <Mail size={16} />
-              <span>Responder invitacion</span>
+              <span>Responder invitación</span>
             </span>
           )}
         </button>
@@ -194,7 +199,10 @@ export default function RsvpModal({
                         type="button"
                         className="rounded-md px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100"
                       >
-                        <X size={30} className="shrink-0 -translate-y-px" />
+                        <X
+                          size={30}
+                          className="shrink-0 -translate-y-px  text-brand-wine"
+                        />
                       </button>
                     </Dialog.Close>
                   </div>
@@ -216,7 +224,7 @@ export default function RsvpModal({
                         gran dia.
                       </p>
                       <div className="flex items-center justify-center my-4">
-                        <PartyPopper size={40} />
+                        <PartyPopper size={40} className=" text-brand-wine" />
                       </div>
                     </div>
                   ) : (

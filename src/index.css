@@ -39,3 +39,18 @@ textarea {
   will-change: transform;
 }
 
+
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.subtle-pulse {
+  animation: subtle-pulse 2.6s ease-in-out infinite;
+}
+
