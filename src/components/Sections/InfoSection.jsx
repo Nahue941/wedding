@@ -161,8 +161,9 @@ export default function InfoSection() {
       content: (
         <>
           <p className="font-normal">
-            Podés confirmar desde esta misma invitación tocando el botón
-            "confirmar asistencia" y llenando el formulario.
+            Podés confirmar desde esta misma invitación tocando el botón{" "}
+            <span className="font-semibold">"confirmar asistencia"</span> y
+            llenando el formulario.
           </p>
           <p className="font-bold">Te pedimos hacerlo antes del 1/9/26.</p>
         </>

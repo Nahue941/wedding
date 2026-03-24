@@ -165,7 +165,7 @@ export default function RsvpModal({
           ) : (
             <span className="inline-flex items-center gap-2">
               <Mail size={16} />
-              <span>Responder invitación</span>
+              <span>Confirmar asistencia</span>
             </span>
           )}
         </button>

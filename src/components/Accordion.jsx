@@ -60,11 +60,11 @@ export default function Accordion({
             {/* Content */}
             <div
               className={`
-                grid transition-all duration-300 ease-out
+                grid w-full min-w-0 transition-all duration-300 ease-out
                 ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
               `}
             >
-              <div className="overflow-hidden px-6 pb-6">
+              <div className={`overflow-hidden px-6 min-w-0 ${open ? "pb-6" : "pb-0"}`}>
                 <div className="text-lg text-brand-wine/80 leading-relaxed">
                   {item.content}
                 </div>
@@ -76,3 +76,4 @@ export default function Accordion({
     </div>
   );
 }
+
