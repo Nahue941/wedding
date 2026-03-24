@@ -6,12 +6,15 @@ import {
 
 import { useState } from "react";
 
-export default function EnvelopeIntro({ onFinish }) {
+export default function EnvelopeIntro({ onFinish, onOpen }) {
   const [opening, setOpening] = useState(false);
 
   const handleOpen = () => {
     setOpening(true);
-    setTimeout(() => onFinish(), TRANSITION_TIME_IN_MS);
+    if (onOpen) {
+      onOpen();
+    }
+    setTimeout(() => onFinish?.(), TRANSITION_TIME_IN_MS);
   };
 
   return (
@@ -67,3 +70,6 @@ export default function EnvelopeIntro({ onFinish }) {
     </div>
   );
 }
+
+
+

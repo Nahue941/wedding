@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 import CeremonySection from "../components/Sections/CeremonySection";
 import DateSection from "../components/Sections/DateSection";
@@ -31,7 +30,6 @@ export default function Home() {
   const [guestCount, setGuestCount] = useState(1);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [opened, setOpened] = useState(false);
-
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -39,23 +37,27 @@ export default function Home() {
     let cancelled = false;
 
     async function validateToken() {
-      if (!normalizedToken) {
-        setIsValidating(false);
-        setIsTokenValid(true);
-        setOpened(true);
-        setInvitationName("");
-        setGuestCount(1);
-        setAlreadySubmitted(false);
+      if (!initialToken) {
+        if (!cancelled) {
+          setIsValidating(false);
+          setIsTokenValid(true);
+          setOpened(true);
+          setInvitationName("");
+          setGuestCount(1);
+          setAlreadySubmitted(false);
+        }
         return;
       }
 
-      setIsValidating(true);
-      setIsTokenValid(false);
-      setOpened(false);
+      if (!cancelled) {
+        setIsValidating(true);
+        setIsTokenValid(false);
+        setOpened(false);
+      }
 
       try {
         const response = await fetch(
-          `/api/invitation?token=${encodeURIComponent(normalizedToken)}`,
+          `/api/invitation?token=${encodeURIComponent(initialToken)}`,
         );
         const data = await response.json();
 
@@ -63,12 +65,14 @@ export default function Home() {
           if (typeof window !== "undefined") {
             window.localStorage.removeItem(INVITATION_TOKEN_KEY);
           }
-          setNormalizedToken("");
-          setIsTokenValid(true);
-          setOpened(true);
-          setInvitationName("");
-          setGuestCount(1);
-          setAlreadySubmitted(false);
+          if (!cancelled) {
+            setNormalizedToken("");
+            setIsTokenValid(true);
+            setOpened(true);
+            setInvitationName("");
+            setGuestCount(1);
+            setAlreadySubmitted(false);
+          }
           return;
         }
 
@@ -77,18 +81,21 @@ export default function Home() {
           const parsedGuestCount = Number(data.invitation?.guestCount);
           setGuestCount(parsedGuestCount > 1 ? parsedGuestCount : 1);
           setAlreadySubmitted(Boolean(data.alreadySubmitted));
+          setNormalizedToken(initialToken);
           setIsTokenValid(true);
         }
       } catch {
         if (typeof window !== "undefined") {
           window.localStorage.removeItem(INVITATION_TOKEN_KEY);
         }
-        setNormalizedToken("");
-        setIsTokenValid(true);
-        setOpened(true);
-        setInvitationName("");
-        setGuestCount(1);
-        setAlreadySubmitted(false);
+        if (!cancelled) {
+          setNormalizedToken("");
+          setIsTokenValid(true);
+          setOpened(true);
+          setInvitationName("");
+          setGuestCount(1);
+          setAlreadySubmitted(false);
+        }
       } finally {
         if (!cancelled) {
           setIsValidating(false);
@@ -100,33 +107,37 @@ export default function Home() {
     return () => {
       cancelled = true;
     };
-  }, [normalizedToken]);
+  }, []);
+
+  useEffect(() => {
+    if (isValidating || !isTokenValid || !wrapperRef.current || !contentRef.current) {
+      return;
+    }
+
+    const existing = ScrollSmoother.get();
+    if (existing) {
+      existing.kill();
+    }
+
+    const smoother = ScrollSmoother.create({
+      wrapper: wrapperRef.current,
+      content: contentRef.current,
+      smooth: 1.2,
+      effects: true,
+      smoothTouch: 0.1,
+    });
+    smoother.scrollTo(0, false);
+
+    ScrollTrigger.refresh();
+
+    return () => smoother?.kill();
+  }, [isValidating, isTokenValid]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && typeof history !== "undefined") {
       history.scrollRestoration = "manual";
-      window.scrollTo(0, 0);
     }
   }, []);
-
-  useGSAP(
-    () => {
-      if (ScrollSmoother.get()) {
-        ScrollSmoother.get().kill();
-      }
-
-      const smoother = ScrollSmoother.create({
-        wrapper: wrapperRef.current,
-        content: contentRef.current,
-        smooth: 1.2,
-        effects: true,
-        smoothTouch: 0.1,
-      });
-
-      return () => smoother?.kill();
-    },
-    { scope: wrapperRef },
-  );
 
   if (isValidating || !isTokenValid) {
     return null;
@@ -170,3 +181,4 @@ export default function Home() {
     </div>
   );
 }
+

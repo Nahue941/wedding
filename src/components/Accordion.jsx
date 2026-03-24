@@ -40,7 +40,7 @@ export default function Accordion({
                 px-6 py-5
                 text-left
                 text-lg font-medium
-                text-brand-black
+                text-brand-wine
                 cursor-pointer
                 transition-all duration-300 ease-out
               "
@@ -65,7 +65,7 @@ export default function Accordion({
               `}
             >
               <div className="overflow-hidden px-6 pb-6">
-                <div className="text-sm text-brand-black/80 leading-relaxed">
+                <div className="text-sm text-brand-wine/80 leading-relaxed">
                   {item.content}
                 </div>
               </div>

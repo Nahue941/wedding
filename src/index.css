@@ -29,10 +29,13 @@ textarea {
 }
 
 #smooth-wrapper {
-  height: 100%;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   overflow: hidden;
 }
 
 #smooth-content {
   will-change: transform;
 }
+
