@@ -17,7 +17,7 @@ export default function DateSection() {
           Guardate la fecha y preparate para festejar con nosotros.
         </p>
 
-        <p className="font-parisienne text-2xl sm:text-3xl mb-12 opacity-90">
+        <p className="font-parisienne text-2xl sm:text-3xl mb-2 opacity-90">
           Faltan para la boda...
         </p>
 
