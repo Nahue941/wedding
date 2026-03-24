@@ -4,6 +4,7 @@ import {
   ClipboardCheck,
   Clock,
   Shirt,
+  TriangleAlert,
   UserPlus,
   Utensils,
 } from "lucide-react";
@@ -24,23 +25,28 @@ export default function InfoSection() {
       ),
       content: (
         <div className="space-y-3">
-          <p>
+          <p className="font-normal">
             <strong>El Dress Code es ELEGANTE</strong>
           </p>
 
-          <p>
+          <p className="font-normal">
             <strong>Ellos:</strong> traje + zapatos (nada de zapatillas)
           </p>
 
-          <p>
+          <p className="font-normal">
             <strong>Ellas:</strong> vestidos largos
           </p>
 
-          <p className="mt-4 font-medium">Atención mujeres</p>
+          <span className="inline-flex items-center gap-2">
+            <TriangleAlert size={20} />
+            <p className="font-medium">Atención mujeres:</p>
+          </span>
 
-          <p>
-            Esta totalmente prohibido usar blanco y tonos claros, esos colores
-            están reservados para la novia.
+          <p className="font-normal">
+            <span className="font-semibold">
+              Esta totalmente prohibido usar blanco
+            </span>{" "}
+            y tonos claros, esos colores están reservados para la novia.
           </p>
         </div>
       ),
@@ -55,8 +61,8 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p>Si.</p>
-          <p>
+          <p className="font-normal">Si.</p>
+          <p className="font-normal">
             Si tenés alguna restricción alimentaria,{" "}
             <span className="font-bold">avisanos en la confirmación.</span>
           </p>
@@ -73,8 +79,8 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p>No.</p>
-          <p>
+          <p className="font-normal">No.</p>
+          <p className="font-normal">
             La celebración será solo para{" "}
             <span className="font-bold">mayores de 16 años</span>. Queremos que
             todos puedan disfrutar la noche con tranquilidad.
@@ -92,8 +98,8 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p>Si.</p>
-          <p>
+          <p className="font-normal">Si.</p>
+          <p className="font-normal">
             El salon cuenta con espacios para que puedan dejar sus vehículos.
           </p>
         </>
@@ -109,8 +115,10 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p>Nuestra ceremonia comenzará puntual a las 20:00 hs.</p>
-          <p>
+          <p className="font-normal">
+            Nuestra ceremonia comenzará puntual a las 20:00 hs.
+          </p>
+          <p className="font-normal">
             <span className="font-bold">
               Les pedimos que lleguen entre 15 y 20 minutos antes
             </span>
@@ -123,18 +131,22 @@ export default function InfoSection() {
       id: "acompañante",
       title: (
         <span className="inline-flex items-center gap-2">
-          <UserPlus size={22} />
-          ¿Puedo llevar un invitado/acompañante?
+          <UserPlus size={18} />
+          ¿Puedo llevar un invitado?
         </span>
       ),
       content: (
         <>
-          <p>Si tu invitación incluye un acompañante, ¡si!</p>
-          <p>
-            De lo contrario, nos gustaría que nuestra boda fuera un evento
-            íntimo, solo con familiares y amigos cercanos.
+          <p className="font-normal">
+            Si tu invitación incluye un acompañante,{" "}
+            <span className="font-semibold">¡si!</span>
           </p>
-          <p>Ante la duda, !consultanos!</p>
+          <p className="font-normal">
+            De lo contrario, nos gustaría que nuestra boda fuera un{" "}
+            <span className="font-semibold">evento íntimo</span>, solo con
+            familiares y amigos cercanos.
+          </p>
+          <p className="font-semibold">Ante la duda, ¡consultanos!</p>
         </>
       ),
     },
@@ -148,7 +160,7 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p>
+          <p className="font-normal">
             Podés confirmar desde esta misma invitación tocando el botón
             "confirmar asistencia" y llenando el formulario.
           </p>

@@ -20,17 +20,17 @@ export default function Hero({ opened }) {
       {/* Contenido encima */}
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <div className="text-center px-6 text-brand-cream">
-          <h1 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-3">
+          <h1 className="font-parisienne text-6xl sm:text-7xl tracking-wide mb-0 leading-[0.5]">
             Naty
           </h1>
-          <h1 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-3">
+          <h1 className="font-parisienne text-4xl sm:text-5xl tracking-wide mb-1">
             &
           </h1>
-          <h1 className="font-parisienne text-5xl sm:text-7xl tracking-wide mb-4">
+          <h1 className="font-parisienne text-6xl sm:text-7xl tracking-wide mb-6">
             Nahue
           </h1>
 
-          <h2 className="font-lato text-2xl sm:text-3xl mb-6">25.09.2026</h2>
+          <h2 className="font-lato text-3xl sm:text-4xl mb-6">25.09.2026</h2>
         </div>
       </div>
     </Section>

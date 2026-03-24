@@ -13,10 +13,6 @@ export default function DateSection() {
           ¡Nos casamos!
         </h2>
 
-        <p className="text-lg sm:text-2xl font-light mb-8 leading-relaxed">
-          Guardate la fecha y preparate para festejar con nosotros.
-        </p>
-
         <p className="font-parisienne text-2xl sm:text-3xl mb-2 opacity-90">
           Faltan para la boda...
         </p>
@@ -25,6 +21,9 @@ export default function DateSection() {
           <Countdown targetDate={weddingDate} />
         </div>
 
+        <p className="text-lg sm:text-2xl font-light mb-2 leading-relaxed">
+          Guardate la fecha y preparate para festejar con nosotros.
+        </p>
         <a
           href="/boda-naty-nahue.ics"
           download="boda-naty-nahue.ics"

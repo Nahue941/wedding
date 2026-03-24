@@ -5,7 +5,7 @@ export default function CeremonySection() {
   return (
     <Section className="bg-brand-cream px-6 text-brand-text" id="ceremony">
       <div className="w-full max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-5xl font-light text-brand-text mb-8 mt-8">
+        <h2 className="text-3xl sm:text-5xl font-semibold text-brand-text mb-4 mt-8">
           Ceremonia & Celebración
         </h2>
 
@@ -29,7 +29,14 @@ export default function CeremonySection() {
           </div>
         </div>
 
-        <div className="w-full mb-10">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-brand-text">
+          Jano's Moreno
+        </h3>
+        <p className="text-lg text-brand-text mb-4">
+          Av Francisco Piovano 3787, Moreno
+        </p>
+
+        <div className="w-full mb-4">
           <img
             src="/images/Salon.jpeg"
             alt="Ceremonia"
@@ -37,13 +44,6 @@ export default function CeremonySection() {
           />
         </div>
 
-        <h3 className="text-2xl sm:text-3xl font-light text-brand-text mb-4">
-          Janos Moreno
-        </h3>
-
-        <p className="text-lg text-brand-text mb-10">
-          Av Francisco Piovano 3787, Moreno
-        </p>
         <a
           href="https://maps.app.goo.gl/VKRwZpnegZjCGwiD8"
           target="_blank"
