@@ -48,6 +48,17 @@ export default function InfoSection() {
             </span>{" "}
             y tonos claros, esos colores están reservados para la novia.
           </p>
+
+          <div className="flex justify-center">
+            <a
+              href="/ideas/vestimenta"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-wine text-brand-cream rounded-full text-base font-semibold tracking-wide shadow-md transition-all duration-300 ease-out hover:brightness-110 hover:scale-105 active:scale-95"
+            >
+              Ideas para tu look
+            </a>
+          </div>
         </div>
       ),
     },
