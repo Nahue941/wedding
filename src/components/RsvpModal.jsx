@@ -13,7 +13,7 @@ function Toast({ message, onClose }) {
   }, [onClose]);
 
   return (
-    <div className="fixed bottom-6 right-4 left-4 sm:left-auto sm:w-auto z-70 rounded-xl bg-[#1f1f1f] px-4 py-3 text-sm text-white shadow-xl">
+    <div className="fixed bottom-6 right-4 left-4 sm:left-auto sm:w-auto z-70 rounded-xl bg-[#1f1f1f] px-4 py-3 text-lg sm:text-xltext-white shadow-xl">
       {message}
     </div>
   );
@@ -124,7 +124,7 @@ export default function RsvpModal({
       }
 
       if (!response.ok) {
-        setToastMessage("Ocurrio un error. Intenta nuevamente.");
+        setToastMessage("Ocurrió un error. Intenta nuevamente.");
         return;
       }
 
@@ -134,7 +134,7 @@ export default function RsvpModal({
 
       setAlreadySubmitted(true);
     } catch {
-      setToastMessage("Ocurrio un error. Intenta nuevamente.");
+      setToastMessage("Ocurrió un error. Intenta nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -151,7 +151,7 @@ export default function RsvpModal({
           type="button"
           className={`
             fixed bottom-12 right-4 z-40 inline-flex items-center gap-2
-            rounded-full bg-brand-wine px-5 py-3 text-sm font-medium text-brand-cream
+            rounded-full bg-brand-wine px-5 py-3 text-lg sm:text-xl font-medium text-brand-cream
             shadow-lg hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-wine
             ring-offset-2 ring-offset-brand-cream
             ${alreadySubmitted ? "" : "subtle-pulse"}
@@ -199,7 +199,7 @@ export default function RsvpModal({
                     <Dialog.Close asChild>
                       <button
                         type="button"
-                        className="rounded-md px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-100"
+                        className="rounded-md px-2 py-1 text-lg sm:text-xl text-neutral-600 hover:bg-neutral-100"
                       >
                         <X
                           size={30}
@@ -221,7 +221,7 @@ export default function RsvpModal({
                       <h4 className="text-lg sm:text-xl font-semibold text-brand-text text-center">
                         ¡Gracias por confirmar la asistencia!
                       </h4>
-                      <p className="text-sm text-neutral-700 text-center">
+                      <p className="text-lg sm:text-xl text-neutral-700 text-center">
                         Nos vemos el 25 de Septiembre para festejar juntos este
                         gran dia.
                       </p>
@@ -232,13 +232,15 @@ export default function RsvpModal({
                   ) : (
                     <form className="space-y-4" onSubmit={onSubmit}>
                       <div className="space-y-2 text-center mb-6">
-                        <h2 className="text-xl font-semibold text-brand-text">
+                        <h2 className="text-2xl sm:text-4xl font-semibold text-brand-text">
                           ¡Hola, {displayName}!
                         </h2>
-                        <p className="text-sm text-neutral-700">{subtitle}</p>
+                        <p className="text-xl sm:text-2xl text-brand-black/95 font-normal">
+                          {subtitle}
+                        </p>
                       </div>
 
-                      <label className="block text-sm text-neutral-700">
+                      <label className="block text-lg sm:text-xl text-brand-black/95 font-normal">
                         Email
                         <input
                           type="email"
@@ -252,7 +254,7 @@ export default function RsvpModal({
                         />
                       </label>
 
-                      <label className="block text-sm text-neutral-700">
+                      <label className="block text-lg sm:text-xl text-brand-black/95 font-normal">
                         Restricciones alimenticias
                         <select
                           value={form.dietaryRestriction}
@@ -272,7 +274,7 @@ export default function RsvpModal({
                         </select>
                       </label>
 
-                      <label className="block text-sm text-neutral-700">
+                      <label className="block text-lg sm:text-xl text-brand-black/95 font-normal">
                         Observaciones
                         <textarea
                           value={form.notes}

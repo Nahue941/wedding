@@ -207,7 +207,7 @@ export default function InfoSection() {
     <Dialog.Root open={isLookOpen} onOpenChange={setIsLookOpen}>
       <Section className="bg-brand-wine px-6 text-brand-cream" id="info">
         <div className="w-full max-w-3xl mx-auto flex flex-col gap-10 mt-8">
-          <h2 className="text-3xl sm:text-5xl font-light text-center text-brand-cream">
+          <h2 className="text-3xl sm:text-5xl font-semibold text-center text-brand-cream">
             Información Util
           </h2>
 
