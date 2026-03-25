@@ -1,4 +1,4 @@
-import { EASING, TRANSITION_TIME } from "../utils/constants";
+﻿import { EASING, TRANSITION_TIME } from "../utils/constants";
 import { useEffect, useRef, useState } from "react";
 
 import AudioToggleButton from "../components/AudioToggleButton";
@@ -29,8 +29,6 @@ export default function Home() {
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const wrapperRef = useRef(null);
-  const contentRef = useRef(null);
   const toggleAudio = () => {
     const audio = audioRef.current;
     if (!audio) {
@@ -187,12 +185,12 @@ export default function Home() {
         {!opened && (
           <EnvelopeIntro
             onFinish={() => setOpened(true)}
-              onOpen={() => {
-                if (isAudioMuted) {
-                  return;
-                }
-                startLoopedAudio(audioRef, setIsAudioPlaying, 0.3);
-              }}
+            onOpen={() => {
+              if (isAudioMuted) {
+                return;
+              }
+              startLoopedAudio(audioRef, setIsAudioPlaying, 0.3);
+            }}
           />
         )}
         <div
@@ -217,6 +215,3 @@ export default function Home() {
     </div>
   );
 }
-
-
-

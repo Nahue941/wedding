@@ -1,3 +1,5 @@
+import * as Dialog from "@radix-ui/react-dialog";
+
 import {
   Baby,
   Car,
@@ -7,13 +9,32 @@ import {
   TriangleAlert,
   UserPlus,
   Utensils,
+  X,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import Accordion from "../Accordion";
 import InstagramIcon from "../Icons/InstagramIcon";
 import Section from "../SectionComponent";
 
 export default function InfoSection() {
+  const [isLookOpen, setIsLookOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    const body = document.body;
+    if (isLookOpen) {
+      const previousOverflow = body.style.overflow;
+      body.style.overflow = "hidden";
+      return () => {
+        body.style.overflow = previousOverflow;
+      };
+    }
+    body.style.overflow = "";
+  }, [isLookOpen]);
+
   const accordionItems = [
     {
       id: "dresscode",
@@ -50,14 +71,14 @@ export default function InfoSection() {
           </p>
 
           <div className="flex justify-center">
-            <a
-              href="/ideas/vestimenta"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-wine text-brand-cream rounded-full text-base font-semibold tracking-wide shadow-md transition-all duration-300 ease-out hover:brightness-110 hover:scale-105 active:scale-95"
-            >
-              Ideas para tu look
-            </a>
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-wine text-brand-cream rounded-full text-base font-semibold tracking-wide shadow-md transition-all duration-300 ease-out hover:brightness-110 hover:scale-105 active:scale-95"
+              >
+                Ideas para tu look
+              </button>
+            </Dialog.Trigger>
           </div>
         </div>
       ),
@@ -183,30 +204,63 @@ export default function InfoSection() {
   ];
 
   return (
-    <Section className="bg-brand-wine px-6 text-brand-cream" id="info">
-      <div className="w-full max-w-3xl mx-auto flex flex-col gap-10 mt-8">
-        <h2 className="text-3xl sm:text-5xl font-light text-center text-brand-cream">
-          Información Util
-        </h2>
+    <Dialog.Root open={isLookOpen} onOpenChange={setIsLookOpen}>
+      <Section className="bg-brand-wine px-6 text-brand-cream" id="info">
+        <div className="w-full max-w-3xl mx-auto flex flex-col gap-10 mt-8">
+          <h2 className="text-3xl sm:text-5xl font-light text-center text-brand-cream">
+            Información Util
+          </h2>
 
-        <Accordion items={accordionItems} />
+          <Accordion items={accordionItems} />
 
-        <div className="mt-6 mb-8 flex flex-col items-center gap-4 text-center">
-          <p className="text-lg sm:text-2xl text-brand-cream">
-            Seguinos en nuestro instagram de la fiesta para enterarte las
-            novedades
-          </p>
-          <a
-            href="https://www.instagram.com/boda.naty.nahue/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram boda naty nahue"
-            className="inline-flex h-14 w-14 sm:h-18 sm:w-18 items-center justify-center rounded-full bg-brand-cream/10 text-brand-cream transition-transform duration-200 hover:scale-105"
-          >
-            <InstagramIcon size={40} />
-          </a>
+          <div className="mt-6 mb-8 flex flex-col items-center gap-4 text-center">
+            <p className="text-lg sm:text-2xl text-brand-cream">
+              Seguinos en nuestro instagram de la fiesta para enterarte las
+              novedades
+            </p>
+            <a
+              href="https://www.instagram.com/boda.naty.nahue/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram boda naty nahue"
+              className="inline-flex h-14 w-14 sm:h-18 sm:w-18 items-center justify-center rounded-full bg-brand-cream/10 text-brand-cream transition-transform duration-200 hover:scale-105"
+            >
+              <InstagramIcon size={40} />
+            </a>
+          </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60" />
+        <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
+          <div className="relative w-full max-w-5xl rounded-2xl bg-brand-cream p-4 shadow-2xl">
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                aria-label="Cerrar"
+                className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-wine text-brand-cream"
+              >
+                <X size={18} />
+              </button>
+            </Dialog.Close>
+            <div className="max-h-[80vh] overflow-auto">
+              <a
+                href="/images/vestimenta.jpeg"
+                target="_blank"
+                rel="noreferrer"
+                className="block"
+              >
+                <img
+                  src="/images/vestimenta.jpeg"
+                  alt="Ideas para tu look"
+                  className="w-full h-auto rounded-xl shadow-lg"
+                />
+              </a>
+            </div>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
