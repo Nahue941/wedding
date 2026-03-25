@@ -1,3 +1,5 @@
+import fs from "fs/promises";
+import path from "path";
 import {
   appendRow,
   getInvitationByToken,
@@ -14,6 +16,12 @@ const ALLOWED_DIETARY_VALUES = new Set([
   "celiaco",
 ]);
 const EMAIL_ERROR_MAX_CHARS = 200;
+const RSVP_PDF_PATH = path.join(
+  process.cwd(),
+  "public",
+  "docs",
+  "guia-invitados.pdf",
+);
 
 function sendJson(res, status, payload) {
   res.status(status).json(payload);
@@ -76,6 +84,8 @@ async function sendConfirmationEmail({ to, name }) {
     throw new Error("Missing Resend configuration.");
   }
 
+  const pdfBuffer = await fs.readFile(RSVP_PDF_PATH);
+
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -88,6 +98,12 @@ async function sendConfirmationEmail({ to, name }) {
       reply_to: replyTo,
       subject: "Confirmación de asistencia recibida",
       html: `<p>Hola ${name || "invitado/a"}, recibimos la confirmación. Gracias por acompañarnos en este día especial.</p>`,
+      attachments: [
+        {
+          filename: "guia-invitados.pdf",
+          content: pdfBuffer.toString("base64"),
+        },
+      ],
     }),
   });
 
@@ -186,3 +202,11 @@ export default async function handler(req, res) {
     sendJson(res, 500, { ok: false, code: "INTERNAL_ERROR" });
   }
 }
+
+
+
+
+
+
+
+
