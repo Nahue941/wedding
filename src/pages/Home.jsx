@@ -1,4 +1,4 @@
-﻿import { EASING, TRANSITION_TIME } from "../utils/constants";
+import { EASING, TRANSITION_TIME } from "../utils/constants";
 import { useEffect, useRef, useState } from "react";
 
 import AudioToggleButton from "../components/AudioToggleButton";
@@ -26,6 +26,7 @@ export default function Home() {
   const [guestCount, setGuestCount] = useState(1);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [opened, setOpened] = useState(false);
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const wrapperRef = useRef(null);
@@ -38,6 +39,10 @@ export default function Home() {
     if (audio.paused) {
       audio.volume = 0.3;
       const playPromise = audio.play();
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("audio_muted", "0");
+      }
+      setIsAudioMuted(false);
       if (playPromise?.then) {
         playPromise.then(() => setIsAudioPlaying(true)).catch(() => {});
       } else {
@@ -46,6 +51,10 @@ export default function Home() {
       return;
     }
     audio.pause();
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("audio_muted", "1");
+    }
+    setIsAudioMuted(true);
     setIsAudioPlaying(false);
   };
 
@@ -126,6 +135,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const stored = window.localStorage.getItem("audio_muted");
+    if (stored === "1") {
+      setIsAudioMuted(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (typeof document === "undefined") {
       return;
     }
@@ -168,7 +187,12 @@ export default function Home() {
         {!opened && (
           <EnvelopeIntro
             onFinish={() => setOpened(true)}
-            onOpen={() => startLoopedAudio(audioRef, setIsAudioPlaying, 0.3)}
+              onOpen={() => {
+                if (isAudioMuted) {
+                  return;
+                }
+                startLoopedAudio(audioRef, setIsAudioPlaying, 0.3);
+              }}
           />
         )}
         <div
@@ -193,3 +217,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+

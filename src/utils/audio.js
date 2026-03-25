@@ -1,4 +1,8 @@
-export const startLoopedAudio = (audioRef, setIsAudioPlaying, volume = 0.3) => {
+export const startLoopedAudio = (
+  audioRef,
+  setIsAudioPlaying,
+  volume = 0.25,
+) => {
   const audio = audioRef?.current;
   if (!audio) {
     return;

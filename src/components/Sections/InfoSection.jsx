@@ -72,7 +72,7 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p className="font-normal">Si.</p>
+          <p className="font-bold">Si.</p>
           <p className="font-normal">
             Si tenés alguna restricción alimentaria,{" "}
             <span className="font-bold">avisanos en la confirmación.</span>
@@ -90,7 +90,7 @@ export default function InfoSection() {
       ),
       content: (
         <>
-          <p className="font-normal">No.</p>
+          <p className="font-bold">No.</p>
           <p className="font-normal">
             La celebración será solo para{" "}
             <span className="font-bold">mayores de 16 años</span>. Queremos que
