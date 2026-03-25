@@ -132,7 +132,7 @@ export default function InfoSection() {
         <>
           <p className="font-normal">Si.</p>
           <p className="font-normal">
-            El salon cuenta con espacios para que puedan dejar sus vehículos.
+            El salón cuenta con espacios para que puedan dejar sus vehículos.
           </p>
         </>
       ),
@@ -197,7 +197,7 @@ export default function InfoSection() {
             <span className="font-semibold">"confirmar asistencia"</span> y
             llenando el formulario.
           </p>
-          <p className="font-bold">Te pedimos hacerlo antes del 1/9/26.</p>
+          <p className="font-bold">Te pedimos hacerlo antes del 01/09/26.</p>
         </>
       ),
     },

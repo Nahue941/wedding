@@ -25,8 +25,8 @@ export default function DateSection() {
           Guardate la fecha y preparate para festejar con nosotros.
         </p>
         <a
-          href="/boda-naty-nahue.ics"
-          download="boda-naty-nahue.ics"
+          href="https://calendar.app.google/E4qsedZQPB9rGL4K7"
+          target="_blank" rel="noreferrer"
           className="
             inline-flex items-center justify-center
             gap-2.5
@@ -49,7 +49,13 @@ export default function DateSection() {
           <Calendar size={24} className="shrink-0 -translate-y-px" />
           AGENDAR FECHA
         </a>
+        <p className="mt-3 text-sm sm:text-base opacity-80">
+          Abre Google Calendar para agendarlo.
+        </p>
       </div>
     </Section>
   );
 }
+
+
+
