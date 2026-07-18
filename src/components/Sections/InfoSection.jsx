@@ -197,7 +197,7 @@ export default function InfoSection() {
             <span className="font-semibold">"confirmar asistencia"</span> y
             llenando el formulario.
           </p>
-          <p className="font-bold">Te pedimos hacerlo antes del 01/09/26.</p>
+          <p className="font-bold">Te pedimos hacerlo antes del 01/08/26.</p>
         </>
       ),
     },
