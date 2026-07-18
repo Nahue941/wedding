@@ -25,8 +25,9 @@ export default function DateSection() {
           Guardate la fecha y preparate para festejar con nosotros.
         </p>
         <a
-          href="https://calendar.app.google/E4qsedZQPB9rGL4K7"
-          target="_blank" rel="noreferrer"
+          href="https://calendar.app.google/Pr36rKDPcAeTr68s7"
+          target="_blank"
+          rel="noreferrer"
           className="
             inline-flex items-center justify-center
             gap-2.5
@@ -56,6 +57,3 @@ export default function DateSection() {
     </Section>
   );
 }
-
-
-
