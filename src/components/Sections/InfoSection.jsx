@@ -5,6 +5,7 @@ import {
   Car,
   ClipboardCheck,
   Clock,
+  Copy,
   Gift,
   Shirt,
   TriangleAlert,
@@ -36,6 +37,21 @@ export default function InfoSection() {
     body.style.overflow = "";
   }, [isLookOpen]);
 
+  const [copied, setCopied] = useState("");
+
+  const copyToClipboard = async (value, type) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(type);
+
+      setTimeout(() => {
+        setCopied("");
+      }, 2000);
+    } catch (error) {
+      console.error("No se pudo copiar:", error);
+    }
+  };
+
   const accordionItems = [
     {
       id: "gift",
@@ -56,38 +72,96 @@ export default function InfoSection() {
           </p>
 
           <p className="font-normal">
-            Por eso, les compartimos nuestros datos por si quieren hacernos un
+            Por eso, les dejamos nuestros datos por si desean hacernos un
             aporte:
           </p>
 
           <div className="space-y-4">
             <div className="rounded-2xl bg-brand-cream/10 p-4">
-              <p className="font-semibold mb-2">Pesos argentinos</p>
+              <p className="font-semibold mb-2">Pesos</p>
 
-              <div className="space-y-1 text-sm">
-                <p>
-                  <span className="font-medium">Alias:</span>{" "}
-                  nahuel.paiva.galicia
-                </p>
-                <p>
-                  <span className="font-medium">CBU:</span>{" "}
-                  0070025230004029200178
-                </p>
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    copyToClipboard("nahuel.paiva.galicia", "alias-pesos")
+                  }
+                  className="w-full flex items-center justify-between gap-3 text-left rounded-lg px-2 py-1.5 transition-all hover:bg-brand-cream/10 active:scale-[0.98]"
+                >
+                  <span>
+                    <span className="font-normal">Alias:</span>{" "}
+                    nahuel.paiva.galicia
+                  </span>
+
+                  {copied === "alias-pesos" ? (
+                    <Check size={18} className="shrink-0" />
+                  ) : (
+                    <Copy size={18} className="shrink-0" />
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    copyToClipboard("0070025230004029200178", "cbu-pesos")
+                  }
+                  className="w-full flex items-center justify-between gap-3 text-left rounded-lg px-2 py-1.5 transition-all hover:bg-brand-cream/10 active:scale-[0.98]"
+                >
+                  <span>
+                    <span className="font-normal">CBU:</span>{" "}
+                    0070025230004029200178
+                  </span>
+
+                  {copied === "cbu-pesos" ? (
+                    <Check size={18} className="shrink-0" />
+                  ) : (
+                    <Copy size={18} className="shrink-0" />
+                  )}
+                </button>
               </div>
             </div>
 
             <div className="rounded-2xl bg-brand-cream/10 p-4">
               <p className="font-semibold mb-2">Dólares</p>
 
-              <div className="space-y-1 text-sm">
-                <p>
-                  <span className="font-medium">Alias:</span>{" "}
-                  nahuel.paiva.gal.usd
-                </p>
-                <p>
-                  <span className="font-medium">CBU:</span>{" "}
-                  0070025231004007605826
-                </p>
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    copyToClipboard("nahuel.paiva.gal.usd", "alias-dolares")
+                  }
+                  className="w-full flex items-center justify-between gap-3 text-left rounded-lg px-2 py-1.5 transition-all hover:bg-brand-cream/10 active:scale-[0.98]"
+                >
+                  <span>
+                    <span className="font-normal">Alias:</span>{" "}
+                    nahuel.paiva.gal.usd
+                  </span>
+
+                  {copied === "alias-dolares" ? (
+                    <Check size={18} className="shrink-0" />
+                  ) : (
+                    <Copy size={18} className="shrink-0" />
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    copyToClipboard("0070025231004007605826", "cbu-dolares")
+                  }
+                  className="w-full flex items-center justify-between gap-3 text-left rounded-lg px-2 py-1.5 transition-all hover:bg-brand-cream/10 active:scale-[0.98]"
+                >
+                  <span>
+                    <span className="font-normal">CBU:</span>{" "}
+                    0070025231004007605826
+                  </span>
+
+                  {copied === "cbu-dolares" ? (
+                    <Check size={18} className="shrink-0" />
+                  ) : (
+                    <Copy size={18} className="shrink-0" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
