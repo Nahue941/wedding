@@ -4,6 +4,7 @@ import {
   Baby,
   Car,
   Check,
+  ClipboardCheck,
   Clock,
   Copy,
   Gift,
