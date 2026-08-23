@@ -5,6 +5,7 @@ import {
   Car,
   ClipboardCheck,
   Clock,
+  Gift,
   Shirt,
   TriangleAlert,
   UserPlus,
@@ -36,6 +37,63 @@ export default function InfoSection() {
   }, [isLookOpen]);
 
   const accordionItems = [
+    {
+      id: "gift",
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <Gift size={18} />
+          ¿Qué les regalo?
+        </span>
+      ),
+      content: (
+        <div className="space-y-5">
+          <p className="font-normal">
+            <strong>
+              Varios nos estuvieron preguntando por el regalo de casamiento y
+              decidimos que el mejor regalo que podrían hacernos es ayudarnos a
+              cumplir nuestro sueño de luna de miel en Japón. 🇯🇵✨
+            </strong>
+          </p>
+
+          <p className="font-normal">
+            Por eso, les compartimos nuestros datos por si quieren hacernos un
+            aporte:
+          </p>
+
+          <div className="space-y-4">
+            <div className="rounded-2xl bg-brand-cream/10 p-4">
+              <p className="font-semibold mb-2">Pesos argentinos</p>
+
+              <div className="space-y-1 text-sm">
+                <p>
+                  <span className="font-medium">Alias:</span>{" "}
+                  nahuel.paiva.galicia
+                </p>
+                <p>
+                  <span className="font-medium">CBU:</span>{" "}
+                  0070025230004029200178
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-brand-cream/10 p-4">
+              <p className="font-semibold mb-2">Dólares</p>
+
+              <div className="space-y-1 text-sm">
+                <p>
+                  <span className="font-medium">Alias:</span>{" "}
+                  nahuel.paiva.gal.usd
+                </p>
+                <p>
+                  <span className="font-medium">CBU:</span>{" "}
+                  0070025231004007605826
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
     {
       id: "dresscode",
       title: (
@@ -197,7 +255,7 @@ export default function InfoSection() {
             <span className="font-semibold">"confirmar asistencia"</span> y
             llenando el formulario.
           </p>
-          <p className="font-bold">Te pedimos hacerlo antes del 15/08/26.</p>
+          <p className="font-bold">Te pedimos hacerlo antes del 01/09/26.</p>
         </>
       ),
     },
