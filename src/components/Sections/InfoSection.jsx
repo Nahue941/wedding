@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import {
   Baby,
   Car,
-  ClipboardCheck,
+  Check,
   Clock,
   Copy,
   Gift,
