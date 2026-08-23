@@ -68,7 +68,7 @@ export default function InfoSection() {
             <strong>
               Varios nos estuvieron preguntando por el regalo de casamiento y
               decidimos que el mejor regalo que podrían hacernos es ayudarnos a
-              cumplir nuestro sueño de luna de miel en Japón. 🇯🇵✨
+              cumplir nuestro sueño de luna de miel en Japón.
             </strong>
           </p>
 
