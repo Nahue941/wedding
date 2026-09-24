@@ -7,6 +7,10 @@ import Navbar from "./Navbar";
  * spacing. It knows nothing about any particular game — each game page is
  * responsible for its own content, rendered as `children`.
  *
+ * Navbar always shows "Juegos" here (`alwaysShowGames`): being on any game
+ * page — including the very first game a guest ever opens — already means
+ * at least this game is discovered, so the link is always meaningful.
+ *
  * Content is top-aligned (not vertically centered): games like the bingo
  * board can be taller than the viewport on small phones, and centering a
  * taller-than-container element would push it up behind the fixed navbar.
@@ -16,7 +20,7 @@ import Navbar from "./Navbar";
 export default function GamePageLayout({ children }) {
   return (
     <div className="min-h-screen bg-brand-wine text-brand-cream flex flex-col font-lato">
-      <Navbar />
+      <Navbar alwaysShowGames />
       <main
         className="flex-1 flex items-start justify-center px-6 pb-16"
         style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 5rem)" }}

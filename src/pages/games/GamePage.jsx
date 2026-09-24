@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 
 import GamePageLayout from "../../components/GamePageLayout";
 import { getGameBySlug } from "../../config/games";
+import { useDiscoverGame } from "../../lib/useDiscoverGame";
 import { gameComponents } from "./gameComponents";
 
 /**
@@ -12,10 +13,17 @@ import { gameComponents } from "./gameComponents";
  * `gameComponents.js` (which component to render) — no new route or page
  * file is needed here. Until a game has an entry in `gameComponents`, this
  * page renders a generic placeholder.
+ *
+ * Visiting this page is also what unlocks the game in progressive
+ * discovery: useDiscoverGame records `slug` as discovered for this device
+ * on the very first render, so a direct link works even if the guest has
+ * never opened /juegos before.
  */
 export default function GamePage() {
   const { slug } = useParams();
   const game = getGameBySlug(slug);
+
+  useDiscoverGame(game ? slug : null);
 
   if (!game) {
     return <Navigate to="/juegos" replace />;
