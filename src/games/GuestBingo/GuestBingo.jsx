@@ -49,7 +49,7 @@ export default function GuestBingo() {
         Bingo de Invitados
       </h1>
 
-      <p className="text-lg sm:text-xl text-center leading-relaxed mb-6 px-1">
+      <p className="text-xl sm:text-2xl text-center leading-relaxed mb-6 px-1">
         Encontrá al invitado que cumple con esta afirmación y anotá su
         nombre. Cuando llenes el bingo mostráselos a los novios para que lo
         validen, mucha suerte y a conocerse

@@ -15,8 +15,8 @@ export default function TreasureHuntItem({ label, isCompleted, onToggle }) {
       aria-label={`${label}${isCompleted ? " (encontrado)" : ""}`}
       className={`
         relative flex items-center justify-center text-center
-        rounded-xl px-4 py-4 min-h-[68px]
-        text-base sm:text-lg font-medium leading-snug
+        rounded-xl px-4 py-4 min-h-[72px]
+        text-lg sm:text-xl font-medium leading-snug
         shadow-sm transition-colors duration-200 ease-out
         active:scale-95
         focus-visible:outline-none focus-visible:ring-2
