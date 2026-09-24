@@ -171,7 +171,7 @@ export default function Home() {
   return (
     <div className="relative">
       <audio ref={audioRef} src="/audio/para-siempre.mp3" preload="auto" />
-      {opened && <Navbar />}
+      {/*{opened && <Navbar />}*/}
       {opened && (
         <AudioToggleButton isPlaying={isAudioPlaying} onToggle={toggleAudio} />
       )}
