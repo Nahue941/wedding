@@ -1,7 +1,6 @@
-import { useState } from "react";
-
 import BingoGrid from "./BingoGrid";
 import { bingoColumns } from "./bingoData";
+import { useState } from "react";
 
 const STORAGE_KEY = "bingo_invitados_answers";
 
@@ -50,9 +49,10 @@ export default function GuestBingo() {
       </h1>
 
       <p className="text-xl sm:text-2xl text-center leading-relaxed mb-6 px-1">
-        Encontrá al invitado que cumple con esta afirmación y anotá su
-        nombre. Cuando llenes el bingo mostráselos a los novios para que lo
-        validen, mucha suerte y a conocerse
+        {`Encontrá al invitado que cumple con esta afirmación y anotá su nombre, tocando el cuadrado (podés editarlo sin problemas)
+        no podés ser vos mismo y no podés repetir persona. Cuando llenes el
+        bingo mostráselos a los novios para que lo validen. Mucha suerte y a
+        conocerse!`}
       </p>
 
       <BingoGrid

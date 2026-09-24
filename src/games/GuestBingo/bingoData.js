@@ -10,13 +10,16 @@
 export const bingoColumns = [
   [
     "Viene del exterior",
-    "Tiene más de 3 hermanos",
-    "Conoció a los novios en el trabajo",
+    "Tiene alguna alergia",
+    "Tiene una mascota inusual",
+    "Tiene uno o más tatuajes",
+    "Es hijo/a único/a",
   ],
-  ["Casi queda detenido", "Tiene un tatuaje", "Es fanático de algún deporte"],
   [
     "Fue operado de urgencia",
-    "Tiene una mascota poco común",
-    "Conoce a los novios desde la infancia",
+    "Usa lentes de contacto",
+    "Es zurdo",
+    "Toca un instrumento",
+    "Practica algún deporte",
   ],
 ];

@@ -9,9 +9,10 @@ export default function MusicBingoHeader() {
       </h1>
 
       <p className="text-xl sm:text-2xl leading-relaxed px-1">
-        A lo largo de la noche va a estar sonando música, si escuchas alguna
-        de estas marcalas. El primero en completar el grid se lleva premio.
-        Gritá BINGO y mostraselo a los novios
+        A lo largo de la noche va a estar sonando música, si escuchas alguna de
+        estas canciones marcalas. La primera COLUMNA completada, tiene premio.
+        Los primeros 2 bingos completos también. Gritá LINEA o BINGO y
+        mostráselo a los novios
       </p>
     </div>
   );
