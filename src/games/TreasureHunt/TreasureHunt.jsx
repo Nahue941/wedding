@@ -1,4 +1,4 @@
-import TreasureHuntGrid from "./TreasureHuntGrid";
+import TreasureHuntList from "./TreasureHuntGrid";
 import TreasureHuntHeader from "./TreasureHuntHeader";
 import { useTreasureHunt } from "./useTreasureHunt";
 
@@ -14,12 +14,12 @@ export default function TreasureHunt() {
     useTreasureHunt();
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-md sm:max-w-lg mx-auto">
       <TreasureHuntHeader
         completedCount={completedCount}
         totalCount={totalCount}
       />
-      <TreasureHuntGrid
+      <TreasureHuntList
         items={items}
         completed={completed}
         onToggle={toggleItem}

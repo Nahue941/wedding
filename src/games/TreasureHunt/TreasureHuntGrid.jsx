@@ -1,17 +1,13 @@
 import TreasureHuntItem from "./TreasureHuntItem";
 
 /**
- * Renders exactly `items.length` cards. Column count is never configured —
- * `auto-fill`/`minmax` lets the grid fit as many ~140px-wide cards as the
- * available width allows (more on desktop, fewer on mobile), wrapping into
- * additional rows as needed. No horizontal scroll, no fixed item count.
+ * Renders `items.length` rows, always stacked vertically — one item per
+ * row at every viewport width, mobile through desktop. No CSS grid, no
+ * multi-column layout, no wrapping: a simple flex column.
  */
-export default function TreasureHuntGrid({ items, completed, onToggle }) {
+export default function TreasureHuntList({ items, completed, onToggle }) {
   return (
-    <div
-      className="grid gap-2 sm:gap-3 w-full"
-      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}
-    >
+    <div className="flex flex-col gap-2 sm:gap-3 w-full">
       {items.map((item) => (
         <TreasureHuntItem
           key={item}
