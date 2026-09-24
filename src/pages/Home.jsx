@@ -8,6 +8,7 @@ import EnvelopeIntro from "../components/Intro/EnvelopeIntro";
 import Footer from "../components/Sections/Footer";
 import Hero from "../components/Hero/Hero";
 import InfoSection from "../components/Sections/InfoSection";
+import Navbar from "../components/Navbar";
 import RsvpModal from "../components/RsvpModal";
 import { startLoopedAudio } from "../utils/audio";
 
@@ -170,6 +171,7 @@ export default function Home() {
   return (
     <div className="relative">
       <audio ref={audioRef} src="/audio/para-siempre.mp3" preload="auto" />
+      {opened && <Navbar />}
       {opened && (
         <AudioToggleButton isPlaying={isAudioPlaying} onToggle={toggleAudio} />
       )}
