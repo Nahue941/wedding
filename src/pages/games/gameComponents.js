@@ -1,5 +1,6 @@
 import GuestBingo from "../../games/GuestBingo/GuestBingo";
 import MusicBingo from "../../games/MusicBingo/MusicBingo";
+import TreasureHunt from "../../games/TreasureHunt/TreasureHunt";
 
 // Maps a game's slug (from src/config/games.js) to the component that
 // implements it. A slug with no entry here still gets a route and a page
@@ -9,4 +10,5 @@ import MusicBingo from "../../games/MusicBingo/MusicBingo";
 export const gameComponents = {
   "bingo-invitados": GuestBingo,
   "bingo-canciones": MusicBingo,
+  "busqueda-del-tesoro": TreasureHunt,
 };
