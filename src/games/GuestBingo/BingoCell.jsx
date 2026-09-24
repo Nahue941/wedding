@@ -37,10 +37,10 @@ export default function BingoCell({ statement, value, onChange }) {
           rounded-xl p-2.5 sm:p-3
           bg-white
           ring-2 ring-brand-wine
-          min-h-[92px] sm:min-h-[108px]
+          min-h-[104px] sm:min-h-[120px]
         "
       >
-        <p className="text-[11px] sm:text-xs font-medium text-brand-wine/70 leading-snug line-clamp-2">
+        <p className="text-sm sm:text-base font-medium text-brand-wine/70 leading-snug line-clamp-2">
           {statement}
         </p>
         <input
@@ -57,7 +57,7 @@ export default function BingoCell({ statement, value, onChange }) {
           placeholder="Nombre..."
           className="
             w-full rounded-lg border border-brand-wine/30
-            px-2 py-1.5 text-sm sm:text-base text-brand-text
+            px-2 py-1.5 text-base sm:text-lg text-brand-text
             focus:outline-none focus:ring-2 focus:ring-brand-wine/50
           "
         />
@@ -72,7 +72,7 @@ export default function BingoCell({ statement, value, onChange }) {
       className={`
         flex flex-col justify-center items-center text-center gap-1.5
         rounded-xl p-2.5 sm:p-3
-        min-h-[92px] sm:min-h-[108px]
+        min-h-[104px] sm:min-h-[120px]
         shadow-sm transition-all duration-200 ease-out
         hover:scale-[1.03] active:scale-95
         ${
@@ -84,15 +84,15 @@ export default function BingoCell({ statement, value, onChange }) {
     >
       {isFilled ? (
         <>
-          <span className="text-sm sm:text-base font-semibold leading-snug break-words">
+          <span className="text-base sm:text-lg font-semibold leading-snug break-words">
             {value}
           </span>
-          <span className="text-[10px] sm:text-[11px] font-normal opacity-80 leading-snug line-clamp-2">
+          <span className="text-xs sm:text-sm font-normal opacity-80 leading-snug line-clamp-2">
             {statement}
           </span>
         </>
       ) : (
-        <span className="text-[11px] sm:text-xs font-medium leading-snug line-clamp-4">
+        <span className="text-sm sm:text-base font-medium leading-snug line-clamp-4">
           {statement}
         </span>
       )}

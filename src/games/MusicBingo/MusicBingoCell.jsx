@@ -15,7 +15,7 @@ export default function MusicBingoCell({ song, artist, year, isMarked, onToggle 
       className={`
         relative flex flex-col justify-center items-center text-center gap-0.5
         rounded-lg sm:rounded-xl p-1.5 sm:p-3
-        min-h-[80px] sm:min-h-[108px]
+        min-h-[88px] sm:min-h-[116px]
         shadow-sm transition-colors duration-200 ease-out
         active:scale-95
         ${
@@ -32,14 +32,14 @@ export default function MusicBingoCell({ song, artist, year, isMarked, onToggle 
         </span>
       )}
 
-      <span className="text-[11px] sm:text-base font-semibold leading-tight break-words line-clamp-3">
+      <span className="text-[13px] sm:text-lg font-semibold leading-tight break-words line-clamp-3">
         {song}
       </span>
-      <span className="text-[9px] sm:text-xs font-normal opacity-80 leading-tight line-clamp-2">
+      <span className="text-[11px] sm:text-sm font-normal opacity-80 leading-tight line-clamp-2">
         {artist}
       </span>
       {year != null && (
-        <span className="hidden sm:inline text-[10px] font-normal opacity-60">
+        <span className="hidden sm:inline text-xs font-normal opacity-60">
           {year}
         </span>
       )}
